@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <title>Treatments</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./doctors.html">Doctors</a></li>
+        <li><a href="./patients.html">Patients</a></li>
+        <li><a href="./appointments.html">Appointments</a></li>
+        <li><a href="./illnesses.html">Illnesses</a></li>
+        <li><a href="./treatments.html">Treatments</a></li>
+      </ul>
+    </nav>
+
+    <h1>Treatments</h1>
+
+    <div class="table-wrapper" id="all-treatments-div">
+      <p><strong>Browse Treatments</strong></p>
+      <table id="all-treatments">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Stock</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Insulin lispro</td>
+          <td>
+            manmade version of human insulin which controls high blood pressure
+            in people with diabetes
+          </td>
+          <td>100</td>
+          <td><a href="#">Edit</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bronchodilator</td>
+          <td>relaxes the muscles in the lungs and widens the bronchi</td>
+          <td>150</td>
+          <td><a href="#">Edit</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Antibiotic eye drops</td>
+          <td>eliminates bacteria that entered the eyes</td>
+          <td>50</td>
+          <td><a href="#">Edit</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Oseltamivir</td>
+          <td>
+            stops the spread of the flu virus in the body and shortens the time
+            that symptoms last
+          </td>
+          <td>80</td>
+          <td><a href="#">Edit</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Zanamivir</td>
+          <td>
+            treats and prevents influenza caused by influenza A and B viruses
+          </td>
+          <td>70</td>
+          <td><a href="#">Edit</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="insert" style="display: block">
+      <form id="addTreatment">
+        <legend><strong>Add Treatment</strong></legend>
+        <fieldset class="fields">
+          <label> Name </label> <input type="text" name="name" />
+          <label> Description </label> <input type="text" name="description" />
+          <label> Stock </label> <input type="text" name="tock" />
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="addTreatment"
+          value="Add New Treatment"
+        />
+        <input class="btn" type="button" value="Cancel" />
+      </form>
+    </div>
+    <br>
+
+    <div id="update" style="display: block">
+      <form id="updateTreatment">
+        <legend><strong>Update Treatment</strong></legend>
+        <fieldset class="fields">
+          <label>ID:</label> 1
+          <label> Name </label>
+          <input type="text" name="name" value="Insulin lispro" />
+          <label> Description </label>
+          <input
+            type="text"
+            name="description"
+            value="manmade version of human insulin which controls high blood pressure in people with diabetes"
+          />
+          <label> Stock </label>
+          <input type="text" name="stock" value="100" />
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="UpdateSaveTreatment"
+          value="Update Treatment"
+        />
+        <input class="btn" type="button" value="Cancel" />
+      </form>
+    </div>
+
+    <br>
+    <div id="delete" style="display: block">
+      <form id="deleteTreatment">
+        <legend><strong>Delete Treatment</strong></legend>
+        <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <label>ID:</label> 1 <label> Name: </label> Insulin lispro
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="DeleteTreatment"
+          value="Delete Treatment"
+        />
+        <input class="btn" type="button" value="Cancel" />
+      </form>
+    </div>
+  </body>
+</html>

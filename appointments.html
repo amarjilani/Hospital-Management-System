@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Appointments</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./doctors.html">Doctors</a></li>
+      <li><a href="./patients.html">Patients</a></li>
+      <li><a href="./appointments.html">Appointments</a></li>
+      <li><a href="./illnesses.html">Illnesses</a></li>
+      <li><a href="./treatments.html">Treatments</a></li>
+    </ul>
+  </nav>
+<h1>Appointments</h1>
+<div id="browse" style="display: block">
+<p><strong>Browse Appointments</strong></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>ID</th>
+    <th>Patient Name</th>
+    <th>Doctor Name</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td >Mark Hanson</td>
+    <td>Michael Smith</td>
+    <td>2023-01-01</td>
+    <td>09:00</td>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >2</td>
+    <td >Stephen Miller</td>
+    <td>John Adams</td>
+    <td>2023-01-07</td>
+    <td>11:00</td>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >3</td>
+    <td >Alice Wells</td>
+    <td>David Jones</td>
+    <td>2023-01-07</td>
+    <td>14:00</td>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >4</td>
+    <td >Joey Clarke</td>
+    <td>Fred Johnson</td>
+    <td>2023-01-08</td>
+    <td>10:00</td>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+  <tr>
+    <td align="right" >5</td>
+    <td >Stephen Miller</td>
+    <td>John Adams</td>
+    <td>2023-01-10</td>
+    <td>09:00</td>
+    <td><a href="#">Edit</a></td>
+    <td><a href="#">Delete</a></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert" style="display: block">
+    <form id="addAppointment">
+        <legend><strong>Create Appointment</strong></legend>
+          <fieldset class="fields">
+            <label> Patient </label> <select name="patient_name">
+                <option value="1">Mark Hanson</option>
+                <option value="2">Alice Wells</option>
+                <option value="3">Stephen Miller</option>
+                <option value="4">Craig Ford</option>
+                <option value="5">Joey Clark</option>
+                </select>
+            <label> Doctor </label> <select name="doctor_name">
+                <option value="1">Michael Smith</option>
+                <option value="2">John Adams</option>
+                <option value="3">David Jones</option>
+                <option value="4">Fred Johnson</option>
+                <option value="5">Thomas King</option>
+                </select>
+            <label>Date</label> <input type="date" name="appt_date">
+            <label>Time</label> <input type="time" name="appt_time">
+          </fieldset>
+          <input class="btn" type="submit" id="addAppointment" value="Set Appointment">
+          <input class="btn" type="button" value="Cancel">
+	</form> <!--add new planet-->
+</div><!-- insert -->
+
+<p>&nbsp;</p>
+<div id="update" style="display: block">
+  <form id="updatePlanet">
+      <legend><strong>Update Appointment</strong></legend>
+          <fieldset class="fields">
+          <label>ID:</label> 1
+            <label> Patient </label> <select name="patient_name">
+                <option value="1" selected="selected">Mark Hanson</option>
+                <option value="2">Alice Wells</option>
+                <option value="3">Stephen Miller</option>
+                <option value="4">Craig Ford</option>
+                <option value="5">Joey Clark</option>
+                </select>
+            <label> Doctor </label> <select name="doctor_name">
+                <option value="1" selected="selected">Michael Smith</option>
+                <option value="2">John Adams</option>
+                <option value="3">David Jones</option>
+                <option value="4">Fred Johnson</option>
+                <option value="5">Thomas King</option>
+                </select>
+            <label>Date</label> <input type="date" name="appt_date" value="2023-01-01">
+            <label>Time</label> <input type="time" name="appt_time" value="09:00">
+          </fieldset>
+          <input class="btn" type="submit" id="addAppointment" value="Set Appointment">
+          <input class="btn" type="button" value="Cancel">
+  </form> 
+</div><!-- update -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+  <form id="deletePatient">
+      <legend><strong>Delete Appointment</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <label>Appointment ID:</label> 1
+            -- Mark Hanson with Dr. Michael Smith on 2023-01-01 at 09:00
+            
+    </fieldset>
+    <input class="btn" type="submit" id="deletePatient" value="Delete Appointment">
+          <input class="btn" type="button" value="Cancel" >
+  </form> 
+</div><!-- delete -->
+</body>
+</html>
