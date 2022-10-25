@@ -61,3 +61,8 @@ td a {
 	color:dark-blue;
 	text-decoration:none;
 }
+
+#delete-icon {
+	width: 75%;
+	height: 20px;
+}
