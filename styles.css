@@ -62,7 +62,7 @@ td a {
 	text-decoration:none;
 }
 
-#delete-icon {
+.edit-icon, .delete-icon  {
 	width: 75%;
 	height: 20px;
 }
