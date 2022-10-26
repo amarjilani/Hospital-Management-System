@@ -18,10 +18,12 @@
       <li><a href="./treatments.html">Treatments</a></li>
     </ul>
   </nav>
+
 <h1>Appointments</h1>
-<div id="browse" style="display: block">
+
+<div class="table-wrapper" id="all-illnesses-div">
 <p><strong>Browse Appointments</strong></p>
-<table border="1" cellpadding="5">
+<table id="all-appointments">
   <tr>
     <th>ID</th>
     <th>Patient Name</th>
@@ -32,7 +34,7 @@
     <th>Delete</th>
   </tr>
   <tr>
-    <td align="right" >1</td>
+    <td>1</td>
     <td >Mark Hanson</td>
     <td>Michael Smith</td>
     <td>2023-01-01</td>
@@ -41,7 +43,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >2</td>
+    <td>2</td>
     <td >Stephen Miller</td>
     <td>John Adams</td>
     <td>2023-01-07</td>
@@ -50,7 +52,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >3</td>
+    <td>3</td>
     <td >Alice Wells</td>
     <td>David Jones</td>
     <td>2023-01-07</td>
@@ -59,7 +61,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >4</td>
+    <td>4</td>
     <td >Joey Clarke</td>
     <td>Fred Johnson</td>
     <td>2023-01-08</td>
@@ -68,7 +70,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >5</td>
+    <td>5</td>
     <td >Stephen Miller</td>
     <td>John Adams</td>
     <td>2023-01-10</td>
@@ -77,8 +79,9 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
 </table>
-<p>&nbsp;</p>
-</div> <!-- browse -->
+</div>
+<br>
+
 <div id="insert" style="display: block">
     <form id="addAppointment">
         <legend><strong>Create Appointment</strong></legend>
@@ -102,12 +105,12 @@
           </fieldset>
           <input class="btn" type="submit" id="addAppointment" value="Set Appointment">
           <input class="btn" type="button" value="Cancel">
-	</form> <!--add new planet-->
-</div><!-- insert -->
+	</form>
+</div>
 
-<p>&nbsp;</p>
+<br>
 <div id="update" style="display: block">
-  <form id="updatePlanet">
+  <form id="updateAppointment">
       <legend><strong>Update Appointment</strong></legend>
           <fieldset class="fields">
           <label>ID:</label> 1
@@ -131,20 +134,20 @@
           <input class="btn" type="submit" id="addAppointment" value="Set Appointment">
           <input class="btn" type="button" value="Cancel">
   </form> 
-</div><!-- update -->
-<p>&nbsp;</p>
+</div>
+
+<br>
 <div id="delete" style="display: block">
-  <form id="deletePatient">
+  <form id="deleteAppointment">
       <legend><strong>Delete Appointment</strong></legend>
           <fieldset class="fields">
           <p>Are you sure you wish to delete the following?</p>
           <label>Appointment ID:</label> 1
-            -- Mark Hanson with Dr. Michael Smith on 2023-01-01 at 09:00
-            
+            -- Mark Hanson with Dr. Michael Smith on 2023-01-01 at 09:00     
     </fieldset>
     <input class="btn" type="submit" id="deletePatient" value="Delete Appointment">
           <input class="btn" type="button" value="Cancel" >
   </form> 
-</div><!-- delete -->
+</div>
 </body>
 </html>

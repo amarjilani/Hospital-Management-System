@@ -19,9 +19,9 @@
     </ul>
   </nav>
 <h1>Doctors</h1>
-<div id="browse" style="display: block">
+<div class="table-wrapper" id="all-illnesses-div">
 <p><strong>Browse Doctors</strong></p>
-<table border="1" cellpadding="5">
+<table id="all-doctors">
   <tr>
     <th>ID</th>
     <th>First Name</th>
@@ -32,17 +32,16 @@
     <th>Delete</th>
   </tr>
   <tr>
-    <td align="right" >1</td>
+    <td>1</td>
     <td >Michael</td>
     <td>Smith</td>
     <td>m.smith@gmail.com</td>
     <td>(123) 456-7890</td>
-    <!-- <td><a href="#">Edit</a></td> -->
     <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >2</td>
+    <td>2</td>
     <td >John</td>
     <td>Adams</td>
     <td>j.adams123@gmail.com</td>
@@ -51,7 +50,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >3</td>
+    <td>3</td>
     <td >David</td>
     <td>Jones</td>
     <td>djones@gmail.com</td>
@@ -60,7 +59,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >4</td>
+    <td>4</td>
     <td >Fred</td>
     <td>Johnson</td>
     <td>fjohnson@gmail.com</td>
@@ -69,7 +68,7 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
   <tr>
-    <td align="right" >5</td>
+    <td>5</td>
     <td >Thomas</td>
     <td>King</td>
     <td>t.king@gmail.com</td>
@@ -78,10 +77,12 @@
     <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
   </tr>
 </table>
-<p>&nbsp;</p>
-</div> <!-- browse -->
+</div>
+<br>
+
+
 <div id="insert" style="display: block">
-    <form id="addPlanet">
+    <form id="addDoctor">
         <legend><strong>Add Doctor</strong></legend>
           <fieldset class="fields">
             <label> First Name </label> <input type="text" name="patient_fname">
@@ -91,10 +92,10 @@
           </fieldset>
           <input class="btn" type="submit" id="addPatient" value="Add New Doctor">
           <input class="btn" type="button" value="Cancel">
-	</form> <!--add new planet-->
-</div><!-- insert -->
+	</form> 
+</div>
+<br>
 
-<p>&nbsp;</p>
 <div id="update" style="display: block">
   <form id="updateDoctor">
       <legend><strong>Update Doctor</strong></legend>
@@ -107,8 +108,9 @@
     <input class="btn" type="submit" id="updateDoctor" value="Update Doctor">
           <input class="btn" type="button" value="Cancel" >
   </form> 
-</div><!-- update -->
-<p>&nbsp;</p>
+</div>
+<br>
+
 <div id="delete" style="display: block">
   <form id="deleteDoctor">
       <legend><strong>Delete Doctor</strong></legend>
@@ -121,6 +123,6 @@
     <input class="btn" type="submit" id="deleteDoctor" value="Delete Doctor">
           <input class="btn" type="button" value="Cancel" >
   </form> 
-</div><!-- delete -->
+</div>
 </body>
 </html>
