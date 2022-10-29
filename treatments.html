@@ -5,6 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script>
+      function clickedDeleteIcon(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `Id: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } 
+      }
+      function cancelDelete() {
+        let element = document.getElementById("delete");
+        element.style.display = "none";
+        let oldLabel = document.getElementById('created-label');
+        oldLabel.remove();
+        }
+
+    </script>
     <title>Treatments</title>
   </head>
   <body>
@@ -41,7 +61,7 @@
           </td>
           <td>100</td>
           <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#"><img onclick="clickedDeleteIcon(1)" class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>2</td>
@@ -49,7 +69,7 @@
           <td>relaxes the muscles in the lungs and widens the bronchi</td>
           <td>150</td>
           <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#"><img onclick="clickedDeleteIcon(2)" class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>3</td>
@@ -57,7 +77,7 @@
           <td>eliminates bacteria that entered the eyes</td>
           <td>50</td>
           <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#"><img onclick="clickedDeleteIcon(3)" class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>4</td>
@@ -68,7 +88,7 @@
           </td>
           <td>80</td>
           <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#"><img onclick="clickedDeleteIcon(4)" class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>5</td>
@@ -78,7 +98,7 @@
           </td>
           <td>70</td>
           <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#"><img onclick="clickedDeleteIcon(5)" class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
       </table>
     </div>
@@ -106,17 +126,17 @@
       <form id="updateTreatment">
         <legend><strong>Update Treatment</strong></legend>
         <fieldset class="fields">
-          <label>ID:</label> 1
+          <label>ID:</label> <span id="update-id">1</span>
           <label> Name </label>
-          <input type="text" name="name" value="Insulin lispro" />
+          <input id="update-name" type="text" name="name" value="Insulin lispro" />
           <label> Description </label>
-          <input
+          <input id="update-description"
             type="text"
             name="description"
             value="manmade version of human insulin which controls high blood pressure in people with diabetes"
           />
           <label> Stock </label>
-          <input type="text" name="stock" value="100" />
+          <input id="update-stock" type="text" name="stock" value="100" />
         </fieldset>
         <input
           class="btn"
@@ -129,12 +149,12 @@
     </div>
 
     <br>
-    <div id="delete" style="display: block">
+    <div id="delete" style="display: none;">
       <form id="deleteTreatment">
         <legend><strong>Delete Treatment</strong></legend>
-        <fieldset class="fields">
+        <fieldset id="delete-fieldset" class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <label>ID:</label> 1 <label> Name: </label> Insulin lispro
+          <!-- <label>ID:</label> 1 <label> Name: </label> Insulin lispro -->
         </fieldset>
         <input
           class="btn"
@@ -142,7 +162,7 @@
           id="DeleteTreatment"
           value="Delete Treatment"
         />
-        <input class="btn" type="button" value="Cancel" />
+        <input class="btn" type="button" value="Cancel" onclick="cancelDelete()"/>
       </form>
     </div>
   </body>
