@@ -6,6 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script>
+      function toggleVisibility(id) {
+        let element = document.getElementById(id);
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+    </script>
   </head>
 
 <body>
@@ -44,8 +54,8 @@
         <td>mhanson12@gmail.com</td>
         <td>(599) 570-4240</td>
         <td>Influenza</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>2</td>
@@ -55,8 +65,8 @@
         <td>awells@gmail.com</td>
         <td>(445) 495-7035</td>
         <td>Asthma, Pneumonia</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>3</td>
@@ -66,8 +76,8 @@
         <td>stephmiller@gmail.com</td>
         <td>(547) 552-3352</td>
         <td>NULL</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>4</td>
@@ -77,8 +87,8 @@
         <td>cford@gmail.com</td>
         <td>(915) 412-1900</td>
         <td>Conjunctivitis</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>5</td>
@@ -88,8 +98,8 @@
         <td>jclarke@gmail.com</td>
         <td>(969) 975-4791</td>
         <td>Type 2 Diabetes</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
     </table>
   </div>
@@ -118,7 +128,7 @@
   </div>
 
   <br>
-  <div id="update" style="display: block">
+  <div id="update" style="display: none">
     <form id="updatePatient">
         <legend><strong>Update Patient</strong></legend>
             <fieldset class="fields">
@@ -143,7 +153,7 @@
   </div>
 
   <br>
-  <div id="delete" style="display: block">
+  <div id="delete" style="display: none">
     <form id="deletePatient">
         <legend><strong>Delete Patient</strong></legend>
             <fieldset class="fields">

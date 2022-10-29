@@ -6,6 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script>
+      function toggleVisibility(id) {
+        let element = document.getElementById(id);
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+    </script>
   </head>
 
 <body>
@@ -40,8 +50,8 @@
         <td>Michael Smith</td>
         <td>2023-01-01</td>
         <td>09:00</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>2</td>
@@ -49,8 +59,8 @@
         <td>John Adams</td>
         <td>2023-01-07</td>
         <td>11:00</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>3</td>
@@ -58,8 +68,8 @@
         <td>David Jones</td>
         <td>2023-01-07</td>
         <td>14:00</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>4</td>
@@ -67,8 +77,8 @@
         <td>Fred Johnson</td>
         <td>2023-01-08</td>
         <td>10:00</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>5</td>
@@ -76,8 +86,8 @@
         <td>John Adams</td>
         <td>2023-01-10</td>
         <td>09:00</td>
-        <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
     </table>
   </div>
@@ -109,7 +119,7 @@
   </div>
 
   <br>
-  <div id="update" style="display: block">
+  <div id="update" style="display: none">
     <form id="updateAppointment">
         <legend><strong>Update Appointment</strong></legend>
             <fieldset class="fields">
@@ -137,7 +147,7 @@
   </div>
 
   <br>
-  <div id="delete" style="display: block">
+  <div id="delete" style="display: none">
     <form id="deleteAppointment">
         <legend><strong>Delete Appointment</strong></legend>
             <fieldset class="fields">
