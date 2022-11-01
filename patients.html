@@ -7,12 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
     <script>
-      function toggleVisibility(id) {
-        let element = document.getElementById(id);
+      function toggleEdit() {
+        let element = document.getElementById("update");
         if (element.style.display === "none") {
           element.style.display = "block";
         } else {
           element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `ID: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
         }
       }
     </script>
@@ -54,8 +70,8 @@
         <td>mhanson12@gmail.com</td>
         <td>(599) 570-4240</td>
         <td>Influenza</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`1 Mark Hanson`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>2</td>
@@ -65,8 +81,8 @@
         <td>awells@gmail.com</td>
         <td>(445) 495-7035</td>
         <td>Asthma, Pneumonia</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`2 Alice Wells`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>3</td>
@@ -76,8 +92,8 @@
         <td>stephmiller@gmail.com</td>
         <td>(547) 552-3352</td>
         <td>NULL</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`3 Stephen Miller`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>4</td>
@@ -87,8 +103,8 @@
         <td>cford@gmail.com</td>
         <td>(915) 412-1900</td>
         <td>Conjunctivitis</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`4 Craig Ford`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>5</td>
@@ -98,8 +114,8 @@
         <td>jclarke@gmail.com</td>
         <td>(969) 975-4791</td>
         <td>Type 2 Diabetes</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`5 Joey Clark`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
     </table>
   </div>
@@ -148,7 +164,7 @@
                 </select>
       </fieldset>
       <input class="btn" type="submit" id="updatePatient" value="Update Patient">
-            <input class="btn" type="button" value="Cancel" >
+            <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
     </form> 
   </div>
 
@@ -156,14 +172,11 @@
   <div id="delete" style="display: none">
     <form id="deletePatient">
         <legend><strong>Delete Patient</strong></legend>
-            <fieldset class="fields">
-            <p>Are you sure you wish to delete the following?</p>
-            <label>ID:</label> 1
-              -- Mark Hanson
-              
+            <fieldset id="delete-fieldset" class="fields">
+            <p>Are you sure you wish to delete the following?</p>              
       </fieldset>
       <input class="btn" type="submit" id="deletePatient" value="Delete Patient">
-            <input class="btn" type="button" value="Cancel" >
+            <input class="btn" type="button" value="Cancel" onclick="toggleDelete()" >
     </form> 
   </div>
 </body>
