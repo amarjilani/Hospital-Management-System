@@ -40,6 +40,7 @@
       <li><a href="./index.html">Home</a></li>
       <li><a href="./doctors.html">Doctors</a></li>
       <li><a href="./patients.html">Patients</a></li>
+      <li><a href="./patients_illnesses.html">Patients_Illnesses</a></li>
       <li><a href="./appointments.html">Appointments</a></li>
       <li><a href="./illnesses.html">Illnesses</a></li>
       <li><a href="./treatments.html">Treatments</a></li>
@@ -47,9 +48,20 @@
   </nav>
 
   <h1>Patients</h1>
-
+  <div class="search">
+    Search patients by: 
+    <select>
+      <option value="1">First Name</option>
+      <option value="2">Last Name</option>
+      <option value="3">Age</option>
+      <option value="4">Email</option>
+      <option value="5">Phone Number</option>
+    </select>
+    <input type="text" placeholder="Search...">
+    <button type="button">Search</button>
+  </div>
   <div class="table-wrapper" id="all-patients-div">
-    <p><strong>Browse Patients</strong></p>
+    <p><strong>Browse All Patients</strong></p>
     <table id="all-patients">
       <tr>
         <th>ID</th>
@@ -58,7 +70,6 @@
         <th>Age</th>
         <th>Email</th>
         <th>Phone Number</th>
-        <th>Illness</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -69,7 +80,6 @@
         <td>41</td>
         <td>mhanson12@gmail.com</td>
         <td>(599) 570-4240</td>
-        <td>Influenza</td>
         <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
         <td><a href="#" onclick="toggleDelete(`1 Mark Hanson`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
@@ -80,7 +90,6 @@
         <td>33</td>
         <td>awells@gmail.com</td>
         <td>(445) 495-7035</td>
-        <td>Asthma, Pneumonia</td>
         <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
         <td><a href="#" onclick="toggleDelete(`2 Alice Wells`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
@@ -91,7 +100,6 @@
         <td>54</td>
         <td>stephmiller@gmail.com</td>
         <td>(547) 552-3352</td>
-        <td>NULL</td>
         <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
         <td><a href="#" onclick="toggleDelete(`3 Stephen Miller`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
@@ -102,7 +110,6 @@
         <td>46</td>
         <td>cford@gmail.com</td>
         <td>(915) 412-1900</td>
-        <td>Conjunctivitis</td>
         <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
         <td><a href="#" onclick="toggleDelete(`4 Craig Ford`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
@@ -113,7 +120,6 @@
         <td>64</td>
         <td>jclarke@gmail.com</td>
         <td>(969) 975-4791</td>
-        <td>Type 2 Diabetes</td>
         <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
         <td><a href="#" onclick="toggleDelete(`5 Joey Clark`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
@@ -129,14 +135,6 @@
               <label> Age </label> <input type="text" name="patient_age">
               <label> Email </label> <input type="text" name="patient_email">
               <label>Phone Number</label> <input type="text" name="patient_phone_number">
-              <label> Illness </label> <select name="patient_illness" multiple>
-                <option value="0">&nbsp;</option>
-                  <option value="1">Type 2 Diabetes</option>
-                  <option value="2">Conjunctivitis</option>
-                  <option value="3">Influenza</option>
-                  <option value="4">Asthma</option>
-                  <option value="5">Pneumonia</option>
-                  </select>
             </fieldset>
             <input class="btn" type="submit" id="addPatient" value="Add new Patient">
             <input class="btn" type="button" value="Cancel">
@@ -154,14 +152,6 @@
             <label> Age </label> <input type="text" name="patient_age" value="41">
             <label> Email </label> <input type="text" name="patient_email" value="mhanson12@gmail.com">
             <label>Phone Number</label> <input type="text" name="patient_phone_number" value="(599) 570-4240">
-            <label> Illness </label> <select name="patient_illness" multiple>
-                <option value="0">&nbsp;</option>
-                <option value="1">Type 2 Diabetes</option>
-                <option value="2">Conjunctivitis</option>
-                <option value="3" selected="selected">Influenza</option>
-                <option value="4">Asthma</option>
-                <option value="5">Pneumonia</option>
-                </select>
       </fieldset>
       <input class="btn" type="submit" id="updatePatient" value="Update Patient">
             <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
