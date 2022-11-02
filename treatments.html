@@ -6,24 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
     <script>
-      function clickedDeleteIcon(id) {
+      function toggleEdit() {
+        let element = document.getElementById("update");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
         let element = document.getElementById("delete");
         if (element.style.display === "none") {
           var fields = document.getElementById('delete-fieldset');
           var newlabel = document.createElement("Label");
           newlabel.id='created-label';
-          newlabel.innerHTML = `Id: ${id}`;
+          newlabel.innerHTML = `ID: ${id}`;
           fields.appendChild(newlabel);
           element.style.display = "block";
-        } 
-      }
-      function cancelDelete() {
-        let element = document.getElementById("delete");
-        element.style.display = "none";
-        let oldLabel = document.getElementById('created-label');
-        oldLabel.remove();
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
         }
-
+      }
     </script>
     <title>Treatments</title>
   </head>
@@ -33,6 +39,7 @@
         <li><a href="./index.html">Home</a></li>
         <li><a href="./doctors.html">Doctors</a></li>
         <li><a href="./patients.html">Patients</a></li>
+        <li><a href="./patients_illnesses.html">Patients-Illnesses</a></li>
         <li><a href="./appointments.html">Appointments</a></li>
         <li><a href="./illnesses.html">Illnesses</a></li>
         <li><a href="./treatments.html">Treatments</a></li>
@@ -66,24 +73,24 @@
             in people with diabetes
           </td>
           <td>100</td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img onclick="clickedDeleteIcon(1)" class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`1 Insulin lispro`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>2</td>
           <td>Bronchodilator</td>
           <td>relaxes the muscles in the lungs and widens the bronchi</td>
           <td>150</td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img onclick="clickedDeleteIcon(2)" class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`2 Bronchodilator`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>3</td>
           <td>Antibiotic eye drops</td>
           <td>eliminates bacteria that entered the eyes</td>
           <td>50</td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img onclick="clickedDeleteIcon(3)" class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`3 Antibiotic eye drops`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>4</td>
@@ -93,8 +100,8 @@
             that symptoms last
           </td>
           <td>80</td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img onclick="clickedDeleteIcon(4)" class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`4 Oseltamivir`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>5</td>
@@ -103,8 +110,8 @@
             treats and prevents influenza caused by influenza A and B viruses
           </td>
           <td>70</td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img onclick="clickedDeleteIcon(5)" class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`5 Zanamivir`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
       </table>
     </div>
@@ -128,7 +135,7 @@
     </div>
     <br>
 
-    <div id="update" style="display: block">
+    <div id="update" style="display: none">
       <form id="updateTreatment">
         <legend><strong>Update Treatment</strong></legend>
         <fieldset class="fields">

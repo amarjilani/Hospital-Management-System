@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
     <title>Illnesses</title>
+    <script>
+      function toggleEdit() {
+        let element = document.getElementById("update");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `ID: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
+        }
+      }
+    </script>
   </head>
   <body>
   <nav>
@@ -13,6 +39,7 @@
       <li><a href="./index.html">Home</a></li>
       <li><a href="./doctors.html">Doctors</a></li>
       <li><a href="./patients.html">Patients</a></li>
+      <li><a href="./patients_illnesses.html">Patients-Illnesses</a></li>
       <li><a href="./appointments.html">Appointments</a></li>
       <li><a href="./illnesses.html">Illnesses</a></li>
       <li><a href="./treatments.html">Treatments</a></li>
@@ -46,8 +73,8 @@
             sugar, causing various symptoms such as weight loss and poor blood
             flow.
           </td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`1 Type 2 Diabetes`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>2</td>
@@ -56,8 +83,8 @@
             an illness caused by inflammation or infection of the eye, causing
             redness and irritation.
           </td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`2 Conjunctivitis`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>3</td>
@@ -66,8 +93,8 @@
             a respiratory illness caused by viral infection, leading to symptoms
             such as fever, cough, and fatigue.
           </td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`3 Influenza`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>4</td>
@@ -76,8 +103,8 @@
             an illness affecting the lung airways, leading to episodes of
             breathing difficulty and coughing.
           </td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`4 Asthma`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
         <tr>
           <td>5</td>
@@ -86,8 +113,8 @@
             an illness caused by infection of the lung air sacs, leading to
             coughing, difficulty breathing and fever.
           </td>
-          <td><a href="#"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`5 Pneumonia`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
         </tr>
       </table>
     </div>
@@ -110,7 +137,7 @@
     </div>
     <br>
 
-    <div id="update" style="display: block">
+    <div id="update" style="display: none">
       <form id="updateIllness">
         <legend><strong>Update Illness</strong></legend>
         <fieldset class="fields">
@@ -137,12 +164,11 @@
     </div>
 
     <br>
-    <div id="delete" style="display: block">
+    <div id="delete" style="display: none">
       <form id="deleteIllness">
         <legend><strong>Delete Illness</strong></legend>
-        <fieldset class="fields">
+        <fieldset id="delete-fieldset" class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <label>ID:</label> 1 <label> Name: </label> Type 2 Diabetes
         </fieldset>
         <input
           class="btn"

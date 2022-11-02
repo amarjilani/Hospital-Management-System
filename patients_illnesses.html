@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Patients_Illnesses</title>
+    <title>Patients-Illnesses</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,25 +33,18 @@
       <li><a href="./index.html">Home</a></li>
       <li><a href="./doctors.html">Doctors</a></li>
       <li><a href="./patients.html">Patients</a></li>
-      <li><a href="./patients_illnesses.html">Patients_Illnesses</a></li>
+      <li><a href="./patients_illnesses.html">Patients-Illnesses</a></li>
       <li><a href="./appointments.html">Appointments</a></li>
       <li><a href="./illnesses.html">Illnesses</a></li>
       <li><a href="./treatments.html">Treatments</a></li>
+      <li><a href="./illnesses-treatments.html">Illnesses-Treatments</a></li>
     </ul>
   </nav>
 
-  <h1>Patients_Illnesses</h1>
-  <div class="search">
-    Search Patient_Illnesses by: 
-    <select>
-      <option value="1">Patient ID</option>
-      <option value="3">Illness ID</option>
-    </select>
-    <input type="text" placeholder="Search...">
-    <button type="button">Search</button>
-  </div>
+  <h1>Patients-Illnesses</h1>
+
   <div class="table-wrapper" id="all-patients-div">
-    <p><strong>Browse Patients_Illnesses</strong></p>
+    <p><strong>Browse Patients-Illnesses</strong></p>
     <table id="all-patients">
       <tr>
         <th>ID</th>
@@ -96,7 +89,7 @@
       <form id="addPatientIllness">
           <legend><strong>Add Patient_Illness</strong></legend>
             <fieldset class="fields">
-            <label> Patient ID </label> <select name="patient_name">
+            <label> Patient ID </label> <select name="patientID">
                 <option value="0">&nbsp;</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -104,7 +97,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                     </select>
-              <label> Illness ID </label> <select name="illness_name">
+              <label> Illness ID </label> <select name="illnessID">
                 <option value="0">&nbsp;</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -113,7 +106,7 @@
                   <option value="5">5</option>
                   </select>
             </fieldset>
-            <input class="btn" type="submit" id="addPatientIllness" value="Add new Patient_Illness">
+            <input class="btn" type="submit" id="addPatientIllness" value="Add new Patient-Illness">
             <input class="btn" type="button" value="Cancel">
     </form> 
   </div>
@@ -121,11 +114,11 @@
   <br>
   <div id="delete" style="display: none">
     <form id="deletePatientIllness">
-        <legend><strong>Delete Patient</strong></legend>
+        <legend><strong>Delete Patient_Illness</strong></legend>
             <fieldset id="delete-fieldset" class="fields">
             <p>Are you sure you wish to delete the following?</p>              
       </fieldset>
-      <input class="btn" type="submit" id="deletePatientIllness" value="Delete Patient_Illness">
+      <input class="btn" type="submit" id="deletePatientIllness" value="Delete Patient-Illness">
             <input class="btn" type="button" value="Cancel" onclick="toggleDelete()" >
     </form> 
   </div>

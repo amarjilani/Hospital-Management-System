@@ -7,12 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="styles.css" rel="stylesheet" type="text/css" />
     <script>
-      function toggleVisibility(id) {
-        let element = document.getElementById(id);
+      function toggleEdit() {
+        let element = document.getElementById("update");
         if (element.style.display === "none") {
           element.style.display = "block";
         } else {
           element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `ID: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
         }
       }
     </script>
@@ -24,7 +40,7 @@
       <li><a href="./index.html">Home</a></li>
       <li><a href="./doctors.html">Doctors</a></li>
       <li><a href="./patients.html">Patients</a></li>
-      <li><a href="./patients_illnesses.html">Patients_Illnesses</a></li>
+      <li><a href="./patients_illnesses.html">Patients-Illnesses</a></li>
       <li><a href="./appointments.html">Appointments</a></li>
       <li><a href="./illnesses.html">Illnesses</a></li>
       <li><a href="./treatments.html">Treatments</a></li>
@@ -52,8 +68,8 @@
         <td>Michael Smith</td>
         <td>2023-01-01</td>
         <td>09:00</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`1 Mark Hanson with Dr. Michael Smith on 2023-01-01 at 09:00`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>2</td>
@@ -61,8 +77,8 @@
         <td>John Adams</td>
         <td>2023-01-07</td>
         <td>11:00</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`2 Stephen Miller with Dr. John Adams on 2023-01-07 at 11:00`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>3</td>
@@ -70,8 +86,8 @@
         <td>David Jones</td>
         <td>2023-01-07</td>
         <td>14:00</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`3 Alice Wells with Dr. David Jones on 2023-01-07 at 14:00`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>4</td>
@@ -79,8 +95,8 @@
         <td>Fred Johnson</td>
         <td>2023-01-08</td>
         <td>10:00</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`4 Joey Clarke with Dr. Fred Johnson on 2023-01-08 at 10:00`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
       <tr>
         <td>5</td>
@@ -88,8 +104,8 @@
         <td>John Adams</td>
         <td>2023-01-10</td>
         <td>09:00</td>
-        <td><a onclick="toggleVisibility(`update`)"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a onclick="toggleVisibility(`delete`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`5 Stephen Miller with Dr. John Adams on 2023-01-10 at 09:00`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
       </tr>
     </table>
   </div>
@@ -99,18 +115,19 @@
           <legend><strong>Create Appointment</strong></legend>
             <fieldset class="fields">
               <label> Patient </label> <select name="patient_name">
-                  <option value="1">Mark Hanson</option>
-                  <option value="2">Alice Wells</option>
-                  <option value="3">Stephen Miller</option>
-                  <option value="4">Craig Ford</option>
-                  <option value="5">Joey Clark</option>
+                  <option value="1">Alice Wells</option>
+                  <option value="2">Craig Ford</option>
+                  <option value="3">Joey Clarke</option>
+                  <option value="4">Mark Hanson</option>
+                  <option value="5">Stephen Miller</option>
                   </select>
               <label> Doctor </label> <select name="doctor_name">
-                  <option value="1">Michael Smith</option>
-                  <option value="2">John Adams</option>
-                  <option value="3">David Jones</option>
-                  <option value="4">Fred Johnson</option>
+                  <option value="1">David Jones</option>
+                  <option value="2">Fred Johnson</option>
+                  <option value="3">John Adams</option>
+                  <option value="4">Michael Smith</option>
                   <option value="5">Thomas King</option>
+                  <option value="6">NULL</option>
                   </select>
               <label>Date</label> <input type="date" name="appt_date">
               <label>Time</label> <input type="time" name="appt_time">
@@ -139,6 +156,7 @@
                   <option value="3">David Jones</option>
                   <option value="4">Fred Johnson</option>
                   <option value="5">Thomas King</option>
+                  <option value="6">NULL</option>
                   </select>
               <label>Date</label> <input type="date" name="appt_date" value="2023-01-01">
               <label>Time</label> <input type="time" name="appt_time" value="09:00">
@@ -152,10 +170,8 @@
   <div id="delete" style="display: none">
     <form id="deleteAppointment">
         <legend><strong>Delete Appointment</strong></legend>
-            <fieldset class="fields">
+            <fieldset id="delete-fieldset" class="fields">
             <p>Are you sure you wish to delete the following?</p>
-            <label>Appointment ID:</label> 1
-              -- Mark Hanson with Dr. Michael Smith on 2023-01-01 at 09:00     
       </fieldset>
       <input class="btn" type="submit" id="deletePatient" value="Delete Appointment">
             <input class="btn" type="button" value="Cancel" >
