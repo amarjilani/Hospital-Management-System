@@ -141,7 +141,7 @@
             <label> Email </label> <input type="text" name="patient_email" value="j.adams123@gmail.com">
             <label>Phone Number</label> <input type="text" name="patient_phone_number" value="(234) 567-8901">
       <input class="btn" type="submit" id="updateDoctor" value="Update Doctor">
-            <input class="btn" type="button" value="Cancel" >
+            <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
     </form> 
   </div>
   <br>
@@ -153,7 +153,7 @@
             <p>Are you sure you wish to delete the following?</p>              
       </fieldset>
       <input class="btn" type="submit" id="deleteDoctor" value="Delete Doctor">
-            <input class="btn" type="button" value="Cancel" >
+            <input class="btn" type="button" value="Cancel" onclick="toggleDelete()">
     </form> 
   </div>
 </body>

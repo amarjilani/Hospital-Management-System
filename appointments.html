@@ -162,7 +162,7 @@
               <label>Time</label> <input type="time" name="appt_time" value="09:00">
             </fieldset>
             <input class="btn" type="submit" id="addAppointment" value="Set Appointment">
-            <input class="btn" type="button" value="Cancel">
+            <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
     </form> 
   </div>
 
@@ -174,7 +174,7 @@
             <p>Are you sure you wish to delete the following?</p>
       </fieldset>
       <input class="btn" type="submit" id="deletePatient" value="Delete Appointment">
-            <input class="btn" type="button" value="Cancel" >
+            <input class="btn" type="button" value="Cancel" onclick="toggleDelete()">
     </form> 
   </div>
 </body>
