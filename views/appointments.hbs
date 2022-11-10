@@ -1,0 +1,161 @@
+<html lang="en">
+  <head>
+    <title>Appointments</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li><a href="./index">Home</a></li>
+        <li><a href="./doctors">Doctors</a></li>
+        <li><a href="./patients">Patients</a></li>
+        <li><a href="./patients_illnesses">Patients-Illnesses</a></li>
+        <li><a href="./appointments">Appointments</a></li>
+        <li><a href="./illnesses">Illnesses</a></li>
+        <li><a href="./treatments">Treatments</a></li>
+        <li><a href="./illnesses-treatments">Illnesses-Treatments</a></li>
+      </ul>
+    </nav>
+
+    <h1>Appointments</h1>
+
+    <div class="table-wrapper" id="all-appointments-div">
+      <p><strong>Browse Appointments</strong></p>
+      <table id="all-appointments">
+        <tr>
+          <th>ID</th>
+          <th>Patient ID</th>
+          <th>Patient Name</th>
+          <th>Doctor ID</th>
+          <th>Doctor Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+
+        {{#each data}}
+          <tr data-value={{this.appointment_id}}>
+            <td>{{this.appointment_id}}</td>
+            <td>{{this.patient_id}}</td>
+            <td>{{this.patient_fname}} {{this.patient_lname}}</td>
+            <td>{{this.doctor_id}}</td>
+            <td>{{this.doctor_fname}} {{this.doctor_lname}}</td>
+            <td>{{this.appointment_date}}</td>
+            <td>{{trimString this.time 0 5}}</td>
+            <td><a href="#" onclick="toggleEdit({{this.appointment_id}}, {{this.patient_id}}, {{this.doctor_id}}, `{{this.appointment_date}}`, `{{this.time}}`)"><img
+                  class="edit-icon"
+                  src="assets/edit-icon.png"
+                /></a></td>
+            <td><a
+                href="#"
+                onclick="showDeleteSection(`{{this.appointment_id}} {{this.patient_fname}} {{this.patient_lname}} with Dr. {{this.doctor_fname}} {{this.doctor_lname}} on {{this.appointment_date}} at {{this.time}}`)"
+              ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
+          </tr>
+        {{/each}}
+
+      </table>
+    </div>
+
+    <div id="insert" style="display: block">
+      <form id="add-appointment">
+      <legend><strong>Create Appointment</strong></legend>
+      <fieldset class="fields">
+      <label for="inputPatientID">Patient: </label>
+      <select name="inputPatientID" id="inputPatientID">
+          <option value=""> Select Patient </option>
+          {{#each patients}}
+          <option value="{{this.patient_id}}">{{this.patient_fname}} {{this.patient_lname}}</option>
+          {{/each}}
+      </select>
+      
+      <label for="inputDoctorID">Doctor: </label>
+      <select name="inputDoctorID" id="inputDoctorID">
+          <option value="NULL"> Select Doctor </option>
+          {{#each doctors}}
+          <option value="{{this.doctor_id}}">{{this.doctor_fname}} {{this.doctor_lname}}</option>
+          {{/each}}
+      </select>
+
+      <label for="inputDate">Date: </label>
+      <input type="date" name="inputDate" id="inputDate">
+
+      <label for="inputTime">Time: </label>
+      <input type="time" name="inputTime" id="inputTime">
+      </fieldset>
+
+      <input type="submit">
+      </form>
+    </div>
+
+    <br />
+    <div id="update" style="display: none">
+      <legend><strong>Update Appointment</strong></legend>
+      <fieldset class="fields">
+      <form id="update-appointment">
+          <label for="inputAppointmentID">ID: </label>
+          <input name="inputAppointmentID" id="inputAppointmentID" disabled="true">
+          </input>
+          
+          <label for="inputPatientID">Patient: </label>
+          <select name="inputPatientID" id="inputPatientIDUpdate">
+              <option value=""> Select Patient </option>
+              {{#each patients}}
+              <option value="{{this.patient_id}}">{{this.patient_fname}} {{this.patient_lname}}</option>
+              {{/each}}
+          </select>
+          
+          <label for="inputDoctorID">Doctor: </label>
+          <select name="inputDoctorID" id="inputDoctorIDUpdate">
+              <option value=""> Select Doctor </option>
+              {{#each doctors}}
+              <option value="{{this.doctor_id}}">{{this.doctor_fname}} {{this.doctor_lname}}</option>
+              {{/each}}
+          </select>
+
+          <label for="inputDate">Date: </label>
+          <input type="date" name="inputDate" id="inputDateUpdate">
+
+          <label for="inputTime">Time: </label>
+          <input type="time" name="inputTime" id="inputTimeUpdate">
+          </fieldset>
+          <input type="submit">
+          <input
+          class="btn"
+          type="button"
+          value="Cancel"
+          onclick="toggleEdit()"
+        />
+        </form>
+      </div>
+
+    <br />
+    <div id="delete" style="display: none">
+      <form id="deleteAppointmentForm">
+        <legend><strong>Delete Appointment</strong></legend>
+        <fieldset id="delete-fieldset" class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+        </fieldset>
+        <input
+          class="deleteButton"
+          type="submit"
+          id="deleteAppointment"
+          value="Delete Appointment"
+        />
+        <input
+          class="btn"
+          type="button"
+          value="Cancel"
+          onclick="hideDeleteSection()"
+        />
+      </form>
+    </div>
+    <script src="/js/delete_appointment.js"></script>
+    <script src="/js/add_appointment.js"></script>
+    <script src="/js/update_appointment.js"></script>
+  </body>
+</html>

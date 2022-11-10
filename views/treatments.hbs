@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script>
+      function toggleEdit() {
+        let element = document.getElementById("update");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `ID: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
+        }
+      }
+    </script>
+    <title>Treatments</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="./index">Home</a></li>
+        <li><a href="./doctors">Doctors</a></li>
+        <li><a href="./patients">Patients</a></li>
+        <li><a href="./patients_illnesses">Patients-Illnesses</a></li>
+        <li><a href="./appointments">Appointments</a></li>
+        <li><a href="./illnesses">Illnesses</a></li>
+        <li><a href="./treatments">Treatments</a></li>
+        <li><a href="./illnesses-treatments">Illnesses-Treatments</a></li>
+      </ul>
+    </nav>
+
+    <h1>Treatments</h1>
+    <div class="search">
+      Search treatment by name: 
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+
+    <div class="table-wrapper" id="all-treatments-div">
+      <p><strong>Browse Treatments</strong></p>
+      <table id="all-treatments">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Stock</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Insulin lispro</td>
+          <td>
+            manmade version of human insulin which controls high blood pressure
+            in people with diabetes
+          </td>
+          <td>100</td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`1 Insulin lispro`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bronchodilator</td>
+          <td>relaxes the muscles in the lungs and widens the bronchi</td>
+          <td>150</td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`2 Bronchodilator`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Antibiotic eye drops</td>
+          <td>eliminates bacteria that entered the eyes</td>
+          <td>50</td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`3 Antibiotic eye drops`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Oseltamivir</td>
+          <td>
+            stops the spread of the flu virus in the body and shortens the time
+            that symptoms last
+          </td>
+          <td>80</td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`4 Oseltamivir`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Zanamivir</td>
+          <td>
+            treats and prevents influenza caused by influenza A and B viruses
+          </td>
+          <td>70</td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`5 Zanamivir`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="insert" style="display: block">
+      <form id="addTreatment">
+        <legend><strong>Add Treatment</strong></legend>
+        <fieldset class="fields">
+          <label> Name </label> <input type="text" name="name" />
+          <label> Description </label> <input type="text" name="description" />
+          <label> Stock </label> <input type="text" name="tock" />
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="addTreatment"
+          value="Add New Treatment"
+        />
+        <input class="btn" type="button" value="Cancel" />
+      </form>
+    </div>
+    <br>
+
+    <div id="update" style="display: none">
+      <form id="updateTreatment">
+        <legend><strong>Update Treatment</strong></legend>
+        <fieldset class="fields">
+          <label>ID:</label> <span id="update-id">1</span>
+          <label> Name </label>
+          <input id="update-name" type="text" name="name" value="Insulin lispro" />
+          <label> Description </label>
+          <input id="update-description"
+            type="text"
+            name="description"
+            value="manmade version of human insulin which controls high blood pressure in people with diabetes"
+          />
+          <label> Stock </label>
+          <input id="update-stock" type="text" name="stock" value="100" />
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="UpdateSaveTreatment"
+          value="Update Treatment"
+        />
+        <input class="btn" type="button" value="Cancel" onclick="toggleEdit()"/>
+      </form>
+    </div>
+
+    <br>
+    <div id="delete" style="display: none;">
+      <form id="deleteTreatment">
+        <legend><strong>Delete Treatment</strong></legend>
+        <fieldset id="delete-fieldset" class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <!-- <label>ID:</label> 1 <label> Name: </label> Insulin lispro -->
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="DeleteTreatment"
+          value="Delete Treatment"
+        />
+        <input class="btn" type="button" value="Cancel" onclick="toggleDelete()"/>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Illnesses</title>
+    <script>
+      function toggleEdit() {
+        let element = document.getElementById("update");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `ID: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
+        }
+      }
+    </script>
+  </head>
+  <body>
+  <nav>
+    <ul>
+      <li><a href="./index">Home</a></li>
+      <li><a href="./doctors">Doctors</a></li>
+      <li><a href="./patients">Patients</a></li>
+      <li><a href="./patients_illnesses">Patients-Illnesses</a></li>
+      <li><a href="./appointments">Appointments</a></li>
+      <li><a href="./illnesses">Illnesses</a></li>
+      <li><a href="./treatments">Treatments</a></li>
+      <li><a href="./illnesses-treatments">Illnesses-Treatments</a></li>
+    </ul>
+  </nav>
+
+    <h1>Illnesses</h1>
+
+    <div class="search">
+      Search illness by name: 
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+
+    <div class="table-wrapper" id="all-illnesses-div">
+      <p><strong>Browse Illnesses</strong></p>
+      <table id="all-illnesses">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Type 2 Diabetes</td>
+          <td>
+            an illness caused by insulin resistance, which leads to high blood
+            sugar, causing various symptoms such as weight loss and poor blood
+            flow.
+          </td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`1 Type 2 Diabetes`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Conjunctivitis</td>
+          <td>
+            an illness caused by inflammation or infection of the eye, causing
+            redness and irritation.
+          </td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`2 Conjunctivitis`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Influenza</td>
+          <td>
+            a respiratory illness caused by viral infection, leading to symptoms
+            such as fever, cough, and fatigue.
+          </td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`3 Influenza`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Asthma</td>
+          <td>
+            an illness affecting the lung airways, leading to episodes of
+            breathing difficulty and coughing.
+          </td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`4 Asthma`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Pneumonia</td>
+          <td>
+            an illness caused by infection of the lung air sacs, leading to
+            coughing, difficulty breathing and fever.
+          </td>
+          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+          <td><a href="#" onclick="toggleDelete(`5 Pneumonia`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="insert" style="display: block">
+      <form id="addIllness">
+        <legend><strong>Add Illness</strong></legend>
+        <fieldset class="fields">
+          <label> Name </label> <input type="text" name="name" />
+          <label> Description </label> <input type="text" name="description" />
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="addIllness"
+          value="Add New Illness"
+        />
+        <input class="btn" type="button" value="Cancel" />
+      </form>
+    </div>
+    <br>
+
+    <div id="update" style="display: none">
+      <form id="updateIllness">
+        <legend><strong>Update Illness</strong></legend>
+        <fieldset class="fields">
+          <label>ID:</label> 1
+          <label> Name </label>
+          <input type="text" name="name" value="Type 2 Diabetes" />
+          <label> Description </label>
+          <input
+            type="text"
+            name="description"
+            value="an illness caused by insulin resistance, which leads to high blood
+            sugar, causing various symptoms such as weight loss and poor blood
+            flow."
+          />
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="UpdateIllness"
+          value="Update Illness"
+        />
+        <input class="btn" type="button" value="Cancel" onclick="toggleEdit()"/>
+      </form>
+    </div>
+
+    <br>
+    <div id="delete" style="display: none">
+      <form id="deleteIllness">
+        <legend><strong>Delete Illness</strong></legend>
+        <fieldset id="delete-fieldset" class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="DeleteIllness"
+          value="Delete Illness"
+        />
+        <input class="btn" type="button" value="Cancel" onclick="toggleDelete()"/>
+      </form>
+    </div>
+  </body>
+</html>

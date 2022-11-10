@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Patients</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script>
+      function toggleEdit() {
+        let element = document.getElementById("update");
+        if (element.style.display === "none") {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      }
+      function toggleDelete(id) {
+        let element = document.getElementById("delete");
+        if (element.style.display === "none") {
+          var fields = document.getElementById('delete-fieldset');
+          var newlabel = document.createElement("Label");
+          newlabel.id='created-label';
+          newlabel.innerHTML = `ID: ${id}`;
+          fields.appendChild(newlabel);
+          element.style.display = "block";
+        } else {
+          let element = document.getElementById("delete");
+          element.style.display = "none";
+          let oldLabel = document.getElementById('created-label');
+          oldLabel.remove();
+        }
+      }
+    </script>
+  </head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="./index">Home</a></li>
+      <li><a href="./doctors">Doctors</a></li>
+      <li><a href="./patients">Patients</a></li>
+      <li><a href="./patients_illnesses">Patients-Illnesses</a></li>
+      <li><a href="./appointments">Appointments</a></li>
+      <li><a href="./illnesses">Illnesses</a></li>
+      <li><a href="./treatments">Treatments</a></li>
+      <li><a href="./illnesses-treatments">Illnesses-Treatments</a></li>
+    </ul>
+  </nav>
+
+  <h1>Patients</h1>
+  <div class="search">
+    Search patients by name: 
+    <input type="text" placeholder="Search...">
+    <button type="button">Search</button>
+  </div>
+  <div class="table-wrapper" id="all-patients-div">
+    <p><strong>Browse All Patients</strong></p>
+    <table id="all-patients">
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td >Mark</td>
+        <td>Hanson</td>
+        <td>41</td>
+        <td>mhanson12@gmail.com</td>
+        <td>(599) 570-4240</td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`1 Mark Hanson`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td >Alice</td>
+        <td>Wells</td>
+        <td>33</td>
+        <td>awells@gmail.com</td>
+        <td>(445) 495-7035</td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`2 Alice Wells`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td >Stephen</td>
+        <td>Miller</td>
+        <td>54</td>
+        <td>stephmiller@gmail.com</td>
+        <td>(547) 552-3352</td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`3 Stephen Miller`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td >Craig</td>
+        <td>Ford</td>
+        <td>46</td>
+        <td>cford@gmail.com</td>
+        <td>(915) 412-1900</td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`4 Craig Ford`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td >Joey</td>
+        <td>Clark</td>
+        <td>64</td>
+        <td>jclarke@gmail.com</td>
+        <td>(969) 975-4791</td>
+        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
+        <td><a href="#" onclick="toggleDelete(`5 Joey Clark`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="insert" style="display: block">
+      <form id="addPatient">
+          <legend><strong>Add Patient</strong></legend>
+            <fieldset class="fields">
+              <label> First Name </label> <input type="text" name="patient_fname">
+              <label> Last Name </label> <input type="text" name="patient_lname">
+              <label> Age </label> <input type="text" name="patient_age">
+              <label> Email </label> <input type="text" name="patient_email">
+              <label>Phone Number</label> <input type="text" name="patient_phone_number">
+            </fieldset>
+            <input class="btn" type="submit" id="addPatient" value="Add new Patient">
+            <input class="btn" type="button" value="Cancel">
+    </form> 
+  </div>
+
+  <br>
+  <div id="update" style="display: none">
+    <form id="updatePatient">
+        <legend><strong>Update Patient</strong></legend>
+            <fieldset class="fields">
+            <label>ID:</label> 1
+            <label> First Name </label> <input type="text" name="patient_fname" value="Mark">
+            <label> Last Name </label> <input type="text" name="patient_lname" value="Hanson">
+            <label> Age </label> <input type="text" name="patient_age" value="41">
+            <label> Email </label> <input type="text" name="patient_email" value="mhanson12@gmail.com">
+            <label>Phone Number</label> <input type="text" name="patient_phone_number" value="(599) 570-4240">
+      </fieldset>
+      <input class="btn" type="submit" id="updatePatient" value="Update Patient">
+            <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
+    </form> 
+  </div>
+
+  <br>
+  <div id="delete" style="display: none">
+    <form id="deletePatient">
+        <legend><strong>Delete Patient</strong></legend>
+            <fieldset id="delete-fieldset" class="fields">
+            <p>Are you sure you wish to delete the following?</p>              
+      </fieldset>
+      <input class="btn" type="submit" id="deletePatient" value="Delete Patient">
+            <input class="btn" type="button" value="Cancel" onclick="toggleDelete()" >
+    </form> 
+  </div>
+</body>
+</html>
