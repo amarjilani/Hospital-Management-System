@@ -72,10 +72,8 @@ function updateRow(data, appointment_id){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == appointment_id) {
 
-            // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
             let patientIdTd = updateRowIndex.getElementsByTagName("td")[1];
             let patientNameTd = updateRowIndex.getElementsByTagName("td")[2];
             let doctorIdTd = updateRowIndex.getElementsByTagName("td")[3];
@@ -85,7 +83,6 @@ function updateRow(data, appointment_id){
             let editTd = updateRowIndex.getElementsByTagName("td")[7];
             let deleteTd = updateRowIndex.getElementsByTagName("td")[8];
 
-            // Reassign homeworld to our value we updated to
             patientIdTd.innerHTML = parsedData[0].patient_id;
             patientNameTd.innerHTML = parsedData[0].patient_fname + " " + parsedData[0].patient_lname
             doctorIdTd.innerHTML = parsedData[0].doctor_id;

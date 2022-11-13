@@ -15,22 +15,6 @@
           element.style.display = "none";
         }
       }
-      function toggleDelete(id) {
-        let element = document.getElementById("delete");
-        if (element.style.display === "none") {
-          var fields = document.getElementById('delete-fieldset');
-          var newlabel = document.createElement("Label");
-          newlabel.id='created-label';
-          newlabel.innerHTML = `ID: ${id}`;
-          fields.appendChild(newlabel);
-          element.style.display = "block";
-        } else {
-          let element = document.getElementById("delete");
-          element.style.display = "none";
-          let oldLabel = document.getElementById('created-label');
-          oldLabel.remove();
-        }
-      }
     </script>
   </head>
 
@@ -49,11 +33,16 @@
   </nav>
 
   <h1>Patients</h1>
+
   <div class="search">
-    Search patients by name: 
-    <input type="text" placeholder="Search...">
-    <button type="button">Search</button>
+    <form id="search-patient" method="GET" action="/patients">
+      <label for="input-name">Search patients by name: </label>
+      <input type="text" name="name" id="input-name-search" placeholder="Search...">
+      <button type="submit">Search</button>
+      <a href="/patients"><button>Reset</button></a>
+    </form>
   </div>
+
   <div class="table-wrapper" id="all-patients-div">
     <p><strong>Browse All Patients</strong></p>
     <table id="all-patients">
@@ -67,56 +56,26 @@
         <th>Edit</th>
         <th>Delete</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td >Mark</td>
-        <td>Hanson</td>
-        <td>41</td>
-        <td>mhanson12@gmail.com</td>
-        <td>(599) 570-4240</td>
-        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#" onclick="toggleDelete(`1 Mark Hanson`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td >Alice</td>
-        <td>Wells</td>
-        <td>33</td>
-        <td>awells@gmail.com</td>
-        <td>(445) 495-7035</td>
-        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#" onclick="toggleDelete(`2 Alice Wells`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td >Stephen</td>
-        <td>Miller</td>
-        <td>54</td>
-        <td>stephmiller@gmail.com</td>
-        <td>(547) 552-3352</td>
-        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#" onclick="toggleDelete(`3 Stephen Miller`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td >Craig</td>
-        <td>Ford</td>
-        <td>46</td>
-        <td>cford@gmail.com</td>
-        <td>(915) 412-1900</td>
-        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#" onclick="toggleDelete(`4 Craig Ford`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td >Joey</td>
-        <td>Clark</td>
-        <td>64</td>
-        <td>jclarke@gmail.com</td>
-        <td>(969) 975-4791</td>
-        <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-        <td><a href="#" onclick="toggleDelete(`5 Joey Clark`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
+      {{#each data}}
+          <tr data-value={{this.patient_id}}>
+            <td>{{this.patient_id}}</td>
+            <td>{{this.patient_fname}}</td>
+            <td>{{this.patient_lname}}</td>
+            <td>{{this.patient_age}}</td>
+            <td> {{this.patient_email}}</td>
+            <td> {{this.patient_phone_number}}</td>
+            {{!-- toggle edit: work in progress --}}
+            <td><a href="#" onclick="toggleEdit()"><img
+                  class="edit-icon"
+                  src="assets/edit-icon.png"
+                /></a></td>
+            <td><a
+                href="#"
+                onclick="showDeleteSection(`{{this.patient_id}} : {{this.patient_fname}} {{this.patient_lname}}`)"
+              ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
+          </tr>
+        {{/each}}
+
     </table>
   </div>
 
@@ -154,14 +113,25 @@
 
   <br>
   <div id="delete" style="display: none">
-    <form id="deletePatient">
+    <form id="deletePatientForm">
         <legend><strong>Delete Patient</strong></legend>
-            <fieldset id="delete-fieldset" class="fields">
-            <p>Are you sure you wish to delete the following?</p>              
-      </fieldset>
-      <input class="btn" type="submit" id="deletePatient" value="Delete Patient">
-            <input class="btn" type="button" value="Cancel" onclick="toggleDelete()" >
-    </form> 
+        <fieldset id="delete-fieldset" class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+        </fieldset>
+        <input
+          class="deleteButton"
+          type="submit"
+          id="deletePatient"
+          value="Delete Patient"
+        />
+        <input
+          class="btn"
+          type="button"
+          value="Cancel"
+          onclick="hideDeleteSection()"
+        />
+      </form>
   </div>
+  <script src="/js/delete_patient.js"></script>
 </body>
 </html>

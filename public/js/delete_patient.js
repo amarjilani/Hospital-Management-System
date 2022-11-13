@@ -1,39 +1,36 @@
 // Get the objects we need to modify
-let deleteAppointmentForm = document.getElementById("deleteAppointmentForm");
+let deletePatientForm = document.getElementById("deletePatientForm");
 
-deleteAppointmentForm.addEventListener("submit", function (e) {
+deletePatientForm.addEventListener("submit", function (e) {
   // Prevent the form from submitting
   e.preventDefault();
 
-  let inputAppointmentId = document.getElementById("created-input").value;
+  let inputPatientId = document.getElementById("created-input").value;
 
   let data = {
-    appointmentId: inputAppointmentId,
+    patientId: inputPatientId,
   };
 
   // Setup our AJAX request
   var xhttp = new XMLHttpRequest();
-  xhttp.open("DELETE", "/delete-appointment", true);
+  xhttp.open("DELETE", "/delete-patient", true);
   xhttp.setRequestHeader("Content-type", "application/json");
 
   // Tell our AJAX request how to resolve
   xhttp.onreadystatechange = () => {
     if (xhttp.readyState == 4 && xhttp.status == 204) {
-      deleteRow(inputAppointmentId);
+      deleteRow(inputPatientId);
     }
   };
-
-  // Send the request and wait for the response
   xhttp.send(JSON.stringify(data));
 });
 
-function deleteRow(appointmentId) {
-  let table = document.getElementById("all-appointments");
+function deleteRow(patientId) {
+  let table = document.getElementById("all-patients");
   for (let i = 0, row; (row = table.rows[i]); i++) {
-    if (table.rows[i].getAttribute("data-value") === appointmentId) {
+    if (table.rows[i].getAttribute("data-value") === patientId) {
       table.deleteRow(i);
       hideDeleteSection();
-      // deleteDropDownMenu(appointmentId);
       break;
     }
   }
@@ -85,13 +82,3 @@ function showDeleteSection(message) {
   }
 }
 
-//needs fixing
-// function deleteDropDownMenu(appointmentID) {
-//   let selectMenu = document.getElementById("inputAppointmentID");
-//   for (let i = 0; i < selectMenu.length; i++) {
-//     if (Number(selectMenu.options[i].value) === Number(appointmentID)) {
-//       selectMenu[i].remove();
-//       break;
-//     }
-//   }
-// }
