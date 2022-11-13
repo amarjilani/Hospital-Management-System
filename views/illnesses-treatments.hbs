@@ -6,25 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/styles.css" />
-    <script>
-      function toggleDelete(id) {
-        let element = document.getElementById("delete");
-        if (element.style.display === "none") {
-          var fields = document.getElementById('delete-fieldset');
-          var newlabel = document.createElement("Label");
-          newlabel.id='created-label';
-          newlabel.innerHTML = `ID: ${id}`;
-          fields.appendChild(newlabel);
-          element.style.display = "block";
-        } else {
-          let element = document.getElementById("delete");
-          element.style.display = "none";
-          let oldLabel = document.getElementById('created-label');
-          oldLabel.remove();
-        }
-      }
-    </script>
-    </script>
   </head>
 
 <body>
@@ -46,43 +27,25 @@
 
   <div class="table-wrapper" id="all-illnesses-treatments-div">
     <p><strong>Browse Illnesses-Treatments</strong></p>
-    <table id="illnesses-treatments">
+    <table id="all-illnesses-treatments">
       <tr>
         <th>Illness Treatment ID</th>
         <th>Illness ID</th>
         <th>Treatment ID</th>
         <th>Delete</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td >1</td>
-        <td>1</td>
-        <td><a href="#" onclick="toggleDelete(`1 Illness ID: 1 Treatment ID: 1`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td >4</td>
-        <td>2</td>
-        <td><a href="#" onclick="toggleDelete(`2 Illness ID: 4 Treatment ID: 2`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td >2</td>
-        <td>3</td>
-        <td><a href="#" onclick="toggleDelete(`3 Illness ID: 2 Treatment ID: 3`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td >3</td>
-        <td>4</td>
-        <td><a href="#" onclick="toggleDelete(`4 Illness ID: 3 Treatment ID: 4`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td >3</td>
-        <td>5</td>
-        <td><a href="#" onclick="toggleDelete(`5 Illness ID: 3 Treatment ID: 5`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-      </tr>
+      {{#each data}}
+          <tr data-value={{this.illness_treatment_id}}>
+            <td>{{this.illness_treatment_id}}</td>
+            <td>{{this.illness_id}}</td>
+              <td>{{this.treatment_id}}</td>
+            <td><a
+                href="#"
+                onclick="showDeleteSection(`{{this.illness_treatment_id}} with Illness ID {{this.illness_id}} and Treatment ID {{this.treatment_id}}`)"
+              ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
+          </tr>
+        {{/each}}
+      
     </table>
   </div>
 
@@ -113,15 +76,26 @@
   <br>
 
   <br>
-  <div id="delete" style="display: none">
-    <form id="deleteIllnessTreatment">
-        <legend><strong>Delete Ilness-Treatment</strong></legend>
-            <fieldset id="delete-fieldset" class="fields">
-            <p>Are you sure you wish to delete the following?</p>
-      </fieldset>
-      <input class="btn" type="submit" id="deleteIllnessTreatment" value="Delete IlnessTreatment">
-            <input class="btn" type="button" value="Cancel" onclick="toggleDelete()">
-    </form> 
-  </div>
+     <div id="delete" style="display: none">
+      <form id="deleteIllnessTreatmentForm">
+        <legend><strong>Delete Illness_Treatment</strong></legend>
+        <fieldset id="delete-fieldset" class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+        </fieldset>
+        <input
+          class="btn"
+          type="submit"
+          id="deleteIllnessTreatment"
+          value="Delete Illness-Treatment"
+        />
+        <input
+          class="btn"
+          type="button"
+          value="Cancel"
+          onclick="hideDeleteSection()"
+        />
+      </form>
+    </div>
+    <script src="/js/delete_illness_treatment.js"></script>
 </body>
 </html>

@@ -14,22 +14,6 @@
           element.style.display = "none";
         }
       }
-      function toggleDelete(id) {
-        let element = document.getElementById("delete");
-        if (element.style.display === "none") {
-          var fields = document.getElementById('delete-fieldset');
-          var newlabel = document.createElement("Label");
-          newlabel.id='created-label';
-          newlabel.innerHTML = `ID: ${id}`;
-          fields.appendChild(newlabel);
-          element.style.display = "block";
-        } else {
-          let element = document.getElementById("delete");
-          element.style.display = "none";
-          let oldLabel = document.getElementById('created-label');
-          oldLabel.remove();
-        }
-      }
     </script>
     <title>Treatments</title>
   </head>
@@ -48,10 +32,20 @@
     </nav>
 
     <h1>Treatments</h1>
+
     <div class="search">
-      Search treatment by name: 
-      <input type="text" placeholder="Search...">
-      <button type="button">Search</button>
+      <form id="search-treatment" method="GET" action="/treatments">
+        <label for="input-name">Search treatments by name: </label>
+        <input
+          type="text"
+          name="name"
+          id="input-name-search"
+          placeholder="Search..."
+        />
+        <button type="submit">Search</button>
+        <a href="/treatments"><button>Reset</button></a>
+      </form>
+      
     </div>
 
     <div class="table-wrapper" id="all-treatments-div">
@@ -65,54 +59,25 @@
           <th>Edit</th>
           <th>Delete</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Insulin lispro</td>
-          <td>
-            manmade version of human insulin which controls high blood pressure
-            in people with diabetes
-          </td>
-          <td>100</td>
-          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#" onclick="toggleDelete(`1 Insulin lispro`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Bronchodilator</td>
-          <td>relaxes the muscles in the lungs and widens the bronchi</td>
-          <td>150</td>
-          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#" onclick="toggleDelete(`2 Bronchodilator`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Antibiotic eye drops</td>
-          <td>eliminates bacteria that entered the eyes</td>
-          <td>50</td>
-          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#" onclick="toggleDelete(`3 Antibiotic eye drops`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Oseltamivir</td>
-          <td>
-            stops the spread of the flu virus in the body and shortens the time
-            that symptoms last
-          </td>
-          <td>80</td>
-          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#" onclick="toggleDelete(`4 Oseltamivir`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Zanamivir</td>
-          <td>
-            treats and prevents influenza caused by influenza A and B viruses
-          </td>
-          <td>70</td>
-          <td><a href="#" onclick="toggleEdit()"><img class="edit-icon" src="assets/edit-icon.png"></a></td>
-          <td><a href="#" onclick="toggleDelete(`5 Zanamivir`)"><img class="delete-icon" src="assets/delete-icon.png"></a></td>
-        </tr>
+        {{#each data}}
+          <tr data-value={{this.treatment_id}}>
+            <td>{{this.treatment_id}}</td>
+            <td>{{this.treatment_name}}</td>
+            <td>{{this.treatment_description}}</td>
+            <td>{{this.treatment_stock}}</td>
+            {{! toggle edit: work in progress }}
+            <td><a href="#" onclick="toggleEdit()"><img
+                  class="edit-icon"
+                  src="assets/edit-icon.png"
+                /></a></td>
+            <td><a
+                href="#"
+                onclick="showDeleteSection(`{{this.treatment_id}} : {{this.treatment_name}}`)"
+              ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
+          </tr>
+        {{/each}}
+  
+        
       </table>
     </div>
 
@@ -162,21 +127,26 @@
     </div>
 
     <br>
-    <div id="delete" style="display: none;">
-      <form id="deleteTreatment">
+   <div id="delete" style="display: none">
+    <form id="deleteTreatmentForm">
         <legend><strong>Delete Treatment</strong></legend>
         <fieldset id="delete-fieldset" class="fields">
           <p>Are you sure you wish to delete the following?</p>
-          <!-- <label>ID:</label> 1 <label> Name: </label> Insulin lispro -->
         </fieldset>
         <input
-          class="btn"
+          class="deleteButton"
           type="submit"
-          id="DeleteTreatment"
+          id="deleteTreatment"
           value="Delete Treatment"
         />
-        <input class="btn" type="button" value="Cancel" onclick="toggleDelete()"/>
+        <input
+          class="btn"
+          type="button"
+          value="Cancel"
+          onclick="hideDeleteSection()"
+        />
       </form>
-    </div>
+  </div>
+  <script src="/js/delete_treatment.js"></script>
   </body>
 </html>

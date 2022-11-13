@@ -292,15 +292,60 @@ app.delete("/delete-illness", function (req, res) {
 });
 
 app.get("/treatments", function (req, res) {
-  res.render("treatments");
+   let query1;
+   if (req.query.name === undefined || req.query.name === "") {
+     query1 = "SELECT * FROM Treatments";
+   } else {
+     query1 = `SELECT * FROM Treatments WHERE LOWER(treatment_name) LIKE LOWER("${req.query.name}")`;
+   }
+
+   db.pool.query(query1, function (err, rows, fields) {
+     res.render("treatments", { data: rows });
+   });
 });
 
+app.delete("/delete-treatment", function (req, res) {
+  let data = req.body;
+  let treatmentId = parseInt(data.treatmentId);
+  let deleteTreatment = "DELETE FROM Treatments WHERE treatment_id = ?";
+
+  db.pool.query(deleteTreatment, [treatmentId], function (error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
 
 
 app.get("/illnesses-treatments", function (req, res) {
-  res.render("illnesses-treatments");
+  let query1 = "SELECT * from Illnesses_Treatments";
+  db.pool.query(query1, function (err, rows, fields) {
+    res.render("illnesses-treatments", { data: rows });
+  });
 });
 
+app.delete("/delete-illness-treatment", function (req, res) {
+  let data = req.body;
+  let illnessTreatmentId = parseInt(data.illnessTreatmentId);
+  let deleteillnessTreatment =
+    "DELETE FROM Illnesses_Treatments WHERE illness_treatment_id = ?";
+
+  db.pool.query(
+    deleteillnessTreatment,
+    [illnessTreatmentId],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  );
+});
 
 
 /*
