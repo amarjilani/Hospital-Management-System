@@ -50,22 +50,18 @@
   </div>
 
   <div id="insert" style="display: block">
-      <form id="addIllnessTreatment">
+      <form id="add-illness-treatment">
           <legend><strong>Create IllnessTreatment</strong></legend>
             <fieldset class="fields">
-              <label> Illness </label> <select name="illness_id">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+              <label> Illness </label> <select id="inputIllnessId">
+                  {{#each illness}}
+                  <option value="{{this.illness_id}}">{{this.illness_id}}</option>
+                  {{/each}}
                   </select>
-              <label> Treatment </label> <select name="treatment_id">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+              <label> Treatment </label> <select id="inputTreatmentId">
+                  {{#each treatment}}
+                  <option value="{{this.treatment_id}}">{{this.treatment_id}}</option>
+                  {{/each}}
                   </select>
             </fieldset>
             <input class="btn" type="submit" id="addIllnessTreatment" value="Set IllnessTreatment">
@@ -97,5 +93,6 @@
       </form>
     </div>
     <script src="/js/delete_illness_treatment.js"></script>
+    <script src="/js/add_illness_treatment.js"></script>
 </body>
 </html>

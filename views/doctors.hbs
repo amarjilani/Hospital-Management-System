@@ -6,16 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/css/styles.css" rel="stylesheet" type="text/css" />
-    <script>
-      function toggleEdit() {
-        let element = document.getElementById("update");
-        if (element.style.display === "none") {
-          element.style.display = "block";
-        } else {
-          element.style.display = "none";
-        }
-      }
-    </script>
   </head>
 
 <body>
@@ -64,7 +54,7 @@
             <td> {{this.doctor_email}}</td>
             <td> {{this.doctor_phone_number}}</td>
             {{!-- toggle edit: work in progress --}}
-            <td><a href="#" onclick="toggleEdit()"><img
+            <td><a href="#" onclick="toggleEdit('{{this.doctor_id}}', '{{this.doctor_fname}}', '{{this.doctor_lname}}', '{{this.doctor_email}}', '{{this.doctor_phone_number}}')"><img
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
@@ -79,30 +69,33 @@
   </div>
 
   <div id="insert" style="display: block">
-      <form id="addDoctor">
+      <form id="add-doctor">
           <legend><strong>Add Doctor</strong></legend>
             <fieldset class="fields">
-              <label> First Name </label> <input type="text" name="patient_fname">
-              <label> Last Name </label> <input type="text" name="patient_lname">
-              <label> Email </label> <input type="text" name="patient_email">
-              <label>Phone Number</label> <input type="text" name="patient_phone_number">
+              <label> First Name </label> <input type="text" id="inputDoctorFname">
+              <label> Last Name </label> <input type="text" id="inputDoctorLname">
+              <label> Email </label> <input type="text" id="inputDoctorEmail">
+              <label>Phone Number</label> <input type="text" id="inputDoctorPhone">
             </fieldset>
-            <input class="btn" type="submit" id="addPatient" value="Add New Doctor">
+            <input class="btn" type="submit" value="Add New Doctor">
             <input class="btn" type="button" value="Cancel">
     </form> 
   </div>
   <br>
 
   <div id="update" style="display: none">
-    <form id="updateDoctor">
+    <form id="update-doctor">
         <legend><strong>Update Doctor</strong></legend>
             <fieldset class="fields">
-            <label>ID:</label> 2
-            <label> First Name </label> <input type="text" name="patient_fname" value="John">
-            <label> Last Name </label> <input type="text" name="patient_lname" value="Adams">
-            <label> Email </label> <input type="text" name="patient_email" value="j.adams123@gmail.com">
-            <label>Phone Number</label> <input type="text" name="patient_phone_number" value="(234) 567-8901">
-      <input class="btn" type="submit" id="updateDoctor" value="Update Doctor">
+            <label for="inputDoctorID">ID: </label>
+            <input id="inputDoctorIDUpdate" disabled="true" class="disabledIdField">
+            </input>
+            <label> First Name </label> <input type="text" id="inputDoctorFnameUpdate">
+            <label> Last Name </label> <input type="text" id="inputDoctorLnameUpdate">
+            <label> Email </label> <input type="text" id="inputDoctorEmailUpdate">
+            <label>Phone Number</label> <input type="text" id="inputDoctorPhoneUpdate">
+            </fieldset>
+            <input type="submit" value="Update Doctor">
             <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
     </form> 
   </div>
@@ -129,6 +122,8 @@
       </form>
     </div>
   <script src="/js/delete_doctor.js"></script>
+  <script src="/js/add_doctor.js"></script>
+  <script src="/js/update_doctor.js"></script>
 
 </body>
 </html>

@@ -73,3 +73,10 @@ td a {
 	border-color:#ccffff;
 	margin-right: 2px;
 }
+
+.disabledIdField {
+	width:30px;
+	background-color:#ccffff;
+	border-color:#ccffff;
+	margin-right: 2px;
+}

@@ -64,8 +64,7 @@
             <td>{{this.patient_age}}</td>
             <td> {{this.patient_email}}</td>
             <td> {{this.patient_phone_number}}</td>
-            {{!-- toggle edit: work in progress --}}
-            <td><a href="#" onclick="toggleEdit()"><img
+            <td><a href="#" onclick="toggleEdit({{this.patient_id}},'{{this.patient_fname}}', '{{this.patient_lname}}', {{this.patient_age}}, '{{this.patient_email}}', '{{this.patient_phone_number}}')"><img
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
@@ -80,14 +79,14 @@
   </div>
 
   <div id="insert" style="display: block">
-      <form id="addPatient">
+      <form id="add-patient">
           <legend><strong>Add Patient</strong></legend>
             <fieldset class="fields">
-              <label> First Name </label> <input type="text" name="patient_fname">
-              <label> Last Name </label> <input type="text" name="patient_lname">
-              <label> Age </label> <input type="text" name="patient_age">
-              <label> Email </label> <input type="text" name="patient_email">
-              <label>Phone Number</label> <input type="text" name="patient_phone_number">
+              <label> First Name </label> <input type="text" id="inputPatientFname">
+              <label> Last Name </label> <input type="text" id="inputPatientLname">
+              <label> Age </label> <input type="text" id="inputPatientAge">
+              <label> Email </label> <input type="text" id="inputPatientEmail">
+              <label>Phone Number</label> <input type="text" id="inputPatientPhone">
             </fieldset>
             <input class="btn" type="submit" id="addPatient" value="Add new Patient">
             <input class="btn" type="button" value="Cancel">
@@ -96,15 +95,17 @@
 
   <br>
   <div id="update" style="display: none">
-    <form id="updatePatient">
+    <form id="update-patient">
         <legend><strong>Update Patient</strong></legend>
             <fieldset class="fields">
-            <label>ID:</label> 1
-            <label> First Name </label> <input type="text" name="patient_fname" value="Mark">
-            <label> Last Name </label> <input type="text" name="patient_lname" value="Hanson">
-            <label> Age </label> <input type="text" name="patient_age" value="41">
-            <label> Email </label> <input type="text" name="patient_email" value="mhanson12@gmail.com">
-            <label>Phone Number</label> <input type="text" name="patient_phone_number" value="(599) 570-4240">
+            <label for="inputDoctorID">ID: </label>
+            <input id="inputPatientIDUpdate" disabled="true" class="disabledIdField">
+            </input>
+            <label> First Name </label> <input type="text" id="inputPatientFnameUpdate">
+            <label> Last Name </label> <input type="text" id="inputPatientLnameUpdate">
+            <label> Age </label> <input type="text" id="inputPatientAgeUpdate">
+            <label> Email </label> <input type="text" id="inputPatientEmailUpdate">
+            <label>Phone Number</label> <input type="text" id="inputPatientPhoneUpdate">
       </fieldset>
       <input class="btn" type="submit" id="updatePatient" value="Update Patient">
             <input class="btn" type="button" value="Cancel" onclick="toggleEdit()">
@@ -133,5 +134,7 @@
       </form>
   </div>
   <script src="/js/delete_patient.js"></script>
+  <script src="/js/add_patient.js"></script>
+  <script src="/js/update_patient.js"></script>
 </body>
 </html>

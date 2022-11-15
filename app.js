@@ -58,6 +58,54 @@ app.get("/doctors", function (req, res) {
   });
 });
 
+app.post("/add-doctor", function(req, res){
+    let data = req.body;
+    console.log(data)
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Doctors (doctor_fname, doctor_lname, doctor_email, doctor_phone_number) VALUES ('${data.doctor_fname}', '${data.doctor_lname}', '${data.doctor_email}', '${data.doctor_phone_number}')`;
+    db.pool.query(query1, function (error, rows, fields) {
+        // Check to see if there was an error
+        if (error) {
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+        } else {
+        let query2 = "SELECT * FROM Doctors;"
+        db.pool.query(query2, function (err, rows, fields) {
+            // Turn datetime to date
+            res.send(rows);
+        });
+        }
+    });
+    });
+
+app.put("/update-doctor", function (req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data)
+    // Create the query and run it on the database
+    let query1 = `UPDATE Doctors SET doctor_fname = '${data.doctor_fname}', doctor_lname = '${data.doctor_lname}', doctor_email = '${data.doctor_email}', doctor_phone_number = '${data.doctor_phone_number}' WHERE doctor_id = ${data.doctor_id};`
+    let query2 = `SELECT * FROM Doctors WHERE doctor_id = ${data.doctor_id};`
+    db.pool.query(query1, function (error, rows, fields) {
+        // Check to see if there was an error
+        if (error) {
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+        } else {
+        db.pool.query(query2, function (error, rows, fields) {
+            if (error) {
+            console.log(error);
+            res.sendStatus(400);
+            } else {
+            res.send(rows);
+            }
+        });
+        }
+    });
+  });
+
 app.delete("/delete-doctor", function (req, res) {
   let data = req.body;
   let doctorId = parseInt(data.doctorId);
@@ -94,6 +142,54 @@ app.get("/patients", function (req, res) {
   });
 });
 
+app.post("/add-patient", function(req, res){
+  let data = req.body;
+  console.log(data)
+
+  // Create the query and run it on the database
+  let query1 = `INSERT INTO Patients (patient_fname, patient_lname, patient_age, patient_email, patient_phone_number) VALUES ('${data.patient_fname}', '${data.patient_lname}', ${data.patient_age}, '${data.patient_email}', '${data.patient_phone_number}')`;
+  db.pool.query(query1, function (error, rows, fields) {
+      // Check to see if there was an error
+      if (error) {
+      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+      console.log(error);
+      res.sendStatus(400);
+      } else {
+      let query2 = "SELECT * FROM Patients;"
+      db.pool.query(query2, function (err, rows, fields) {
+          // Turn datetime to date
+          res.send(rows);
+      });
+      }
+  });
+  });
+
+app.put("/update-patient", function (req, res) {
+  // Capture the incoming data and parse it back to a JS object
+  let data = req.body;
+  console.log(data)
+  // Create the query and run it on the database
+  let query1 = `UPDATE Patients SET patient_fname = '${data.patient_fname}', patient_lname = '${data.patient_lname}', patient_age = ${data.patient_age}, patient_email = '${data.patient_email}', patient_phone_number = '${data.patient_phone_number}' WHERE patient_id = ${data.patient_id};`
+  let query2 = `SELECT * FROM Patients WHERE patient_id = ${data.patient_id};`
+  db.pool.query(query1, function (error, rows, fields) {
+      // Check to see if there was an error
+      if (error) {
+      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+      console.log(error);
+      res.sendStatus(400);
+      } else {
+      db.pool.query(query2, function (error, rows, fields) {
+          if (error) {
+          console.log(error);
+          res.sendStatus(400);
+          } else {
+          res.send(rows);
+          }
+      });
+      }
+  });
+});
+
 app.delete("/delete-patient", function (req, res) {
   let data = req.body;
   let patientId = parseInt(data.patientId);
@@ -111,10 +207,42 @@ app.delete("/delete-patient", function (req, res) {
 
 app.get("/patients_illnesses", function (req, res) {
   let query1 = "SELECT * from Patients_Illnesses";
+  let query2 = "SELECT * from Patients";
+  let query3 = "SELECT * from Illnesses"
   db.pool.query(query1, function (err, rows, fields) {
-    res.render("patients_illnesses", { data: rows });
-  });
+    let data = rows; 
+    db.pool.query(query2, function (err, rows, fields){
+      let patients = rows; 
+      db.pool.query(query3, function (err, rows, fields){
+        let illnesses = rows; 
+        res.render("patients_illnesses", { data: data, patient: patients, illness: illnesses  });
+      }
+    )}   
+)});
 });
+
+app.post("/add-patient-illness", function(req, res){
+  let data = req.body;
+  console.log(data)
+
+  // Create the query and run it on the database
+  let query1 = `INSERT INTO Patients_Illnesses (patient_id, illness_id) VALUES ('${data.patient_id}', '${data.illness_id}')`;
+  db.pool.query(query1, function (error, rows, fields) {
+      // Check to see if there was an error
+      if (error) {
+      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+      console.log(error);
+      res.sendStatus(400);
+      } else {
+      let query2 = "SELECT * FROM Patients_Illnesses;"
+      db.pool.query(query2, function (err, rows, fields) {
+          // Turn datetime to date
+          res.send(rows);
+      });
+      }
+  });
+  });
+
 
 app.delete("/delete-patient-illness", function (req, res) {
   let data = req.body;
@@ -276,6 +404,54 @@ app.get("/illnesses", function (req, res) {
   });
 });
 
+app.post("/add-illness", function(req, res){
+  let data = req.body;
+  console.log(data)
+
+  // Create the query and run it on the database
+  let query1 = `INSERT INTO Illnesses (illness_name, illness_description) VALUES ('${data.illness_name}', '${data.illness_description}')`;
+  db.pool.query(query1, function (error, rows, fields) {
+      // Check to see if there was an error
+      if (error) {
+      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+      console.log(error);
+      res.sendStatus(400);
+      } else {
+      let query2 = "SELECT * FROM Illnesses;"
+      db.pool.query(query2, function (err, rows, fields) {
+          // Turn datetime to date
+          res.send(rows);
+      });
+      }
+  });
+  });
+
+  app.put("/update-illness", function (req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data)
+    // Create the query and run it on the database
+    let query1 = `UPDATE Illnesses SET illness_name = '${data.illness_name}', illness_description = '${data.illness_description}' WHERE illness_id = ${data.illness_id};`
+    let query2 = `SELECT * FROM Illnesses WHERE illness_id = ${data.illness_id};`
+    db.pool.query(query1, function (error, rows, fields) {
+        // Check to see if there was an error
+        if (error) {
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+        } else {
+        db.pool.query(query2, function (error, rows, fields) {
+            if (error) {
+            console.log(error);
+            res.sendStatus(400);
+            } else {
+            res.send(rows);
+            }
+        });
+        }
+    });
+  });
+
 app.delete("/delete-illness", function (req, res) {
   let data = req.body;
   let illnessId = parseInt(data.illnessId);
@@ -304,6 +480,54 @@ app.get("/treatments", function (req, res) {
    });
 });
 
+app.post("/add-treatment", function(req, res){
+  let data = req.body;
+  console.log(data)
+
+  // Create the query and run it on the database
+  let query1 = `INSERT INTO Treatments (treatment_name, treatment_description, treatment_stock) VALUES ('${data.treatment_name}', '${data.treatment_description}', ${data.treatment_stock})`;
+  db.pool.query(query1, function (error, rows, fields) {
+      // Check to see if there was an error
+      if (error) {
+      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+      console.log(error);
+      res.sendStatus(400);
+      } else {
+      let query2 = "SELECT * FROM Treatments;"
+      db.pool.query(query2, function (err, rows, fields) {
+          // Turn datetime to date
+          res.send(rows);
+      });
+      }
+  });
+  });
+
+  app.put("/update-treatment", function (req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data)
+    // Create the query and run it on the database
+    let query1 = `UPDATE Treatments SET treatment_name = '${data.treatment_name}', treatment_description = '${data.treatment_description}', treatment_stock = ${data.treatment_stock} WHERE treatment_id = ${data.treatment_id};`
+    let query2 = `SELECT * FROM Treatments WHERE treatment_id = ${data.treatment_id};`
+    db.pool.query(query1, function (error, rows, fields) {
+        // Check to see if there was an error
+        if (error) {
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+        } else {
+        db.pool.query(query2, function (error, rows, fields) {
+            if (error) {
+            console.log(error);
+            res.sendStatus(400);
+            } else {
+            res.send(rows);
+            }
+        });
+        }
+    });
+  });
+
 app.delete("/delete-treatment", function (req, res) {
   let data = req.body;
   let treatmentId = parseInt(data.treatmentId);
@@ -322,10 +546,42 @@ app.delete("/delete-treatment", function (req, res) {
 
 app.get("/illnesses-treatments", function (req, res) {
   let query1 = "SELECT * from Illnesses_Treatments";
+  let query2 = "SELECT * from Illnesses"
+  let query3 = "SELECT * from Treatments"
   db.pool.query(query1, function (err, rows, fields) {
-    res.render("illnesses-treatments", { data: rows });
+    let data = rows; 
+    db.pool.query(query2, function(err, rows, fields) {
+      let illnesses = rows 
+      db.pool.query(query3, function(err, rows, fields) {
+        let treatments = rows
+        res.render("illnesses-treatments", { data: data, illness: illnesses, treatment: treatments  });
+      })
+    })
   });
 });
+
+app.post("/add-illness-treatment", function(req, res){
+  let data = req.body;
+  console.log(data)
+
+  // Create the query and run it on the database
+  let query1 = `INSERT INTO Illnesses_Treatments (illness_id, treatment_id) VALUES ('${data.illness_id}', '${data.treatment_id}')`;
+  db.pool.query(query1, function (error, rows, fields) {
+      // Check to see if there was an error
+      if (error) {
+      // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+      console.log(error);
+      res.sendStatus(400);
+      } else {
+      let query2 = "SELECT * FROM Illnesses_Treatments;"
+      db.pool.query(query2, function (err, rows, fields) {
+          // Turn datetime to date
+          res.send(rows);
+      });
+      }
+  });
+  });
+
 
 app.delete("/delete-illness-treatment", function (req, res) {
   let data = req.body;

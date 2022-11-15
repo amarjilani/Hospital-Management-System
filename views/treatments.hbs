@@ -66,7 +66,7 @@
             <td>{{this.treatment_description}}</td>
             <td>{{this.treatment_stock}}</td>
             {{! toggle edit: work in progress }}
-            <td><a href="#" onclick="toggleEdit()"><img
+            <td><a href="#" onclick="toggleEdit('{{this.treatment_id}}', '{{this.treatment_name}}', '{{this.treatment_description}}', {{this.treatment_stock}})"><img
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
@@ -82,12 +82,12 @@
     </div>
 
     <div id="insert" style="display: block">
-      <form id="addTreatment">
+      <form id="add-treatment">
         <legend><strong>Add Treatment</strong></legend>
         <fieldset class="fields">
-          <label> Name </label> <input type="text" name="name" />
-          <label> Description </label> <input type="text" name="description" />
-          <label> Stock </label> <input type="text" name="tock" />
+          <label> Name </label> <input type="text" id="inputTreatmentName"/>
+          <label> Description </label> <input type="text" id="inputTreatmentDescription" />
+          <label> Stock </label> <input type="text" id="inputTreatmentStock" />
         </fieldset>
         <input
           class="btn"
@@ -101,20 +101,20 @@
     <br>
 
     <div id="update" style="display: none">
-      <form id="updateTreatment">
+      <form id="update-treatment">
         <legend><strong>Update Treatment</strong></legend>
         <fieldset class="fields">
-          <label>ID:</label> <span id="update-id">1</span>
+          <label for="inputTreatmentID">ID: </label>
+          <input id="inputTreatmentIDUpdate" disabled="true" class="disabledIdField">
           <label> Name </label>
-          <input id="update-name" type="text" name="name" value="Insulin lispro" />
+          <input type="text" id="inputTreatmentNameUpdate"/>
           <label> Description </label>
-          <input id="update-description"
+          <input 
             type="text"
-            name="description"
-            value="manmade version of human insulin which controls high blood pressure in people with diabetes"
+            id="inputTreatmentDescriptionUpdate"
           />
           <label> Stock </label>
-          <input id="update-stock" type="text" name="stock" value="100" />
+          <input type="text" id="inputTreatmentStockUpdate"/>
         </fieldset>
         <input
           class="btn"
@@ -148,5 +148,7 @@
       </form>
   </div>
   <script src="/js/delete_treatment.js"></script>
+  <script src="/js/add_treatment.js"></script>
+  <script src="/js/update_treatment.js"></script>
   </body>
 </html>

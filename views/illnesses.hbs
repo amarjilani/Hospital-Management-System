@@ -58,7 +58,7 @@
             <td>{{this.illness_name}}</td>
             <td>{{this.illness_description}}</td>
             {{! toggle edit: work in progress }}
-            <td><a href="#" onclick="toggleEdit()"><img
+            <td><a href="#" onclick="toggleEdit('{{this.illness_id}}', '{{this.illness_name}}', '{{this.illness_description}}' )"><img
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
@@ -73,13 +73,13 @@
     </div>
 
     <div id="insert" style="display: block">
-      <form id="addIllness">
+      <form id="add-illness">
         <legend><strong>Add Illness</strong></legend>
         <fieldset class="fields">
           <label> Name </label>
-          <input type="text" name="name" />
+          <input type="text" id="inputIllnessName" />
           <label> Description </label>
-          <input type="text" name="description" />
+          <input type="text" id="inputIllnessDescription"/>
         </fieldset>
         <input
           class="btn"
@@ -93,20 +93,18 @@
     <br />
 
     <div id="update" style="display: none">
-      <form id="updateIllness">
+      <form id="update-illness">
         <legend><strong>Update Illness</strong></legend>
         <fieldset class="fields">
-          <label>ID:</label>
-          1
+          <label for="inputDoctorID">ID: </label>
+          <input id="inputIllnessIDUpdate" disabled="true" class="disabledIdField">
+          </input>
           <label> Name </label>
-          <input type="text" name="name" value="Type 2 Diabetes" />
+          <input type="text" id="inputIllnessNameUpdate"/>
           <label> Description </label>
           <input
             type="text"
-            name="description"
-            value="an illness caused by insulin resistance, which leads to high blood
-            sugar, causing various symptoms such as weight loss and poor blood
-            flow."
+            id="inputIllnessDescriptionUpdate"
           />
         </fieldset>
         <input
@@ -146,5 +144,7 @@
       </form>
   </div>
   <script src="/js/delete_illness.js"></script>
+  <script src="/js/add_illness.js"></script>
+  <script src="/js/update_illness.js"></script>
   </body>
 </html>
