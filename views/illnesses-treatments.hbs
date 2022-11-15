@@ -31,14 +31,18 @@
       <tr>
         <th>Illness Treatment ID</th>
         <th>Illness ID</th>
+        <th>Illness Name</th>
         <th>Treatment ID</th>
+        <th>Treatment Name</th>
         <th>Delete</th>
       </tr>
       {{#each data}}
           <tr data-value={{this.illness_treatment_id}}>
             <td>{{this.illness_treatment_id}}</td>
             <td>{{this.illness_id}}</td>
-              <td>{{this.treatment_id}}</td>
+            <td>{{this.illness_name}}</td>
+            <td>{{this.treatment_id}}</td>
+            <td>{{this.treatment_name}}</td>
             <td><a
                 href="#"
                 onclick="showDeleteSection(`{{this.illness_treatment_id}} with Illness ID {{this.illness_id}} and Treatment ID {{this.treatment_id}}`)"
