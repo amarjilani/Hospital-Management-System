@@ -55,16 +55,16 @@
 
   <div id="insert" style="display: block">
       <form id="add-illness-treatment">
-          <legend><strong>Create IllnessTreatment</strong></legend>
+          <legend><strong>Create Illness-Treatment</strong></legend>
             <fieldset class="fields">
               <label> Illness </label> <select id="inputIllnessId">
                   {{#each illness}}
-                  <option value="{{this.illness_id}}">{{this.illness_id}}</option>
+                  <option value="{{this.illness_id}}">{{this.illness_name}}</option>
                   {{/each}}
                   </select>
               <label> Treatment </label> <select id="inputTreatmentId">
                   {{#each treatment}}
-                  <option value="{{this.treatment_id}}">{{this.treatment_id}}</option>
+                  <option value="{{this.treatment_id}}">{{this.treatment_name}}</option>
                   {{/each}}
                   </select>
             </fieldset>

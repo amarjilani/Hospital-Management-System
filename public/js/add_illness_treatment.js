@@ -69,7 +69,9 @@ addRowToTable = (data) => {
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let illnessIdCell = document.createElement("TD");
+    let illnessNameCell = document.createElement("TD");
     let treatmentIdCell = document.createElement("TD");
+    let treatmentNameCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
     let deleteIcon = document.createElement("img")
 
@@ -84,13 +86,17 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.illness_treatment_id;
     illnessIdCell.innerText = newRow.illness_id;
+    illnessNameCell.innerText = newRow.illness_name;
     treatmentIdCell.innerText = newRow.treatment_id;
+    treatmentNameCell.innerText = newRow.treatment_name;
     deleteCell.append(deleteIcon)
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(illnessIdCell);
+    row.appendChild(illnessNameCell)
     row.appendChild(treatmentIdCell);
+    row.appendChild(treatmentNameCell)
     row.appendChild(deleteCell)
     row.setAttribute('data-value', newRow.illness_treatment_id);
     

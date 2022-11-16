@@ -208,8 +208,8 @@ app.delete("/delete-patient", function (req, res) {
 app.get("/patients_illnesses", function (req, res) {
   let query1 =
     "SELECT Patients_Illnesses.patient_illness_id, Patients_Illnesses.patient_id, Patients.patient_fname, Patients.patient_lname, Patients_Illnesses.illness_id, Illnesses.illness_name FROM Patients_Illnesses LEFT JOIN Patients ON Patients_Illnesses.patient_id = Patients.patient_id LEFT JOIN Illnesses ON Patients_Illnesses.illness_id = Illnesses.illness_id ORDER BY patient_illness_id;";
-  let query2 = "SELECT * from Patients";
-  let query3 = "SELECT * from Illnesses"
+  let query2 = "SELECT * from Patients ORDER BY patient_id ASC";
+  let query3 = "SELECT * from Illnesses ORDER BY illness_name ASC"
   db.pool.query(query1, function (err, rows, fields) {
     let data = rows;
     db.pool.query(query2, function (err, rows, fields){
@@ -235,7 +235,8 @@ app.post("/add-patient-illness", function(req, res){
       console.log(error);
       res.sendStatus(400);
       } else {
-      let query2 = "SELECT * FROM Patients_Illnesses;"
+      let query2 = "SELECT Patients_Illnesses.patient_illness_id, Patients_Illnesses.patient_id, Patients.patient_fname, Patients.patient_lname, Patients_Illnesses.illness_id, Illnesses.illness_name FROM Patients_Illnesses LEFT JOIN Patients ON Patients_Illnesses.patient_id = Patients.patient_id LEFT JOIN Illnesses ON Patients_Illnesses.illness_id = Illnesses.illness_id ORDER BY patient_illness_id;";
+
       db.pool.query(query2, function (err, rows, fields) {
           // Turn datetime to date
           res.send(rows);
@@ -548,8 +549,8 @@ app.delete("/delete-treatment", function (req, res) {
 app.get("/illnesses-treatments", function (req, res) {
   let query1 =
     "SELECT Illnesses_Treatments.illness_treatment_id, Illnesses_Treatments.illness_id, Illnesses_Treatments.treatment_id, Illnesses.illness_name, Treatments.treatment_name FROM Illnesses_Treatments LEFT JOIN Illnesses ON Illnesses_Treatments.illness_id = Illnesses.illness_id LEFT JOIN Treatments ON Illnesses_Treatments.treatment_id = Treatments.treatment_id ORDER BY illness_treatment_id;";
-  let query2 = "SELECT * from Illnesses"
-  let query3 = "SELECT * from Treatments"
+  let query2 = "SELECT * from Illnesses ORDER BY illness_name ASC"
+  let query3 = "SELECT * from Treatments ORDER BY treatment_name ASC"
   db.pool.query(query1, function (err, rows, fields) {
     let data = rows; 
     db.pool.query(query2, function(err, rows, fields) {
@@ -575,7 +576,7 @@ app.post("/add-illness-treatment", function(req, res){
       console.log(error);
       res.sendStatus(400);
       } else {
-      let query2 = "SELECT * FROM Illnesses_Treatments;"
+      let query2 = "SELECT Illnesses_Treatments.illness_treatment_id, Illnesses_Treatments.illness_id, Illnesses_Treatments.treatment_id, Illnesses.illness_name, Treatments.treatment_name FROM Illnesses_Treatments LEFT JOIN Illnesses ON Illnesses_Treatments.illness_id = Illnesses.illness_id LEFT JOIN Treatments ON Illnesses_Treatments.treatment_id = Treatments.treatment_id ORDER BY illness_treatment_id;";
       db.pool.query(query2, function (err, rows, fields) {
           // Turn datetime to date
           res.send(rows);

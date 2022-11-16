@@ -55,18 +55,18 @@
       <form id="add-patient-illness">
         <legend><strong>Add Patient_Illness</strong></legend>
         <fieldset class="fields">
-          <label> Patient ID </label>
+          <label> Patient </label>
           <select id="inputPatientId">
             <option value="0">&nbsp;</option>
             {{#each patient}}
-            <option value="{{this.patient_id}}">{{this.patient_id}}</option>
+            <option value="{{this.patient_id}}">ID: {{this.patient_id}} -- {{this.patient_fname}} {{this.patient_lname}}</option>
             {{/each}}
           </select>
-          <label> Illness ID </label>
+          <label> Illness </label>
           <select id="inputIllnessId">
             <option value="0">&nbsp;</option>
             {{#each illness}}
-            <option value="{{this.illness_id}}">{{this.illness_id}}</option>
+            <option value="{{this.illness_id}}">{{this.illness_name}}</option>
             {{/each}}
           </select>
         </fieldset>
