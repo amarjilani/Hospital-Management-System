@@ -114,7 +114,7 @@ addRowToTable = (data) => {
     }
 
     dateCell.innerText = newRow.appointment_date;
-    timeCell.innerText = newRow.time.slice(0,5); 
+    timeCell.innerText = timeAMPM(newRow.time); 
     editCell.append(editIcon)
     deleteCell.append(deleteIcon)
 
@@ -138,7 +138,6 @@ function toggleEdit(appointment_id, patient_id, doctor_id, date, time) {
     console.log(time)
     console.log(date)
     let dateFormatted = new Date(date).toLocaleDateString("fr-CA")
-    console.log(dateFormatted)
     let element = document.getElementById("update");
     let appointmentSelect = document.getElementById("inputAppointmentID")
     let patientSelect = document.getElementById("inputPatientIDUpdate")
@@ -161,3 +160,23 @@ function toggleEdit(appointment_id, patient_id, doctor_id, date, time) {
         inputDate.value = '';
         inputTime.value = '';
 }};
+
+function timeAMPM(inputString) {
+    var trimmedString = String(inputString).slice(0, 5);
+    let hour = parseInt(trimmedString.slice(0, 2));
+    let remainingString = trimmedString.slice(2);
+    let outputStr;
+
+    if (hour == 0) {
+        outputStr = "12" + remainingString + " AM";
+    } else if (hour > 0 && hour < 10) {
+        outputStr = trimmedString.substring(1) + " AM";
+    } else if (hour >= 10 && hour < 12) {
+        outputStr = trimmedString + " AM";
+    } else if (hour == 12) {
+        outputStr = trimmedString + " PM";
+    } else if (hour > 12) {
+        outputStr = (hour - 12).toString() + remainingString + " PM";
+    }
+    return outputStr;
+}

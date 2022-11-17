@@ -92,7 +92,7 @@ function updateRow(data, appointment_id){
             doctorNameTd.innerHTML = parsedData[0].doctor_fname + " " + parsedData[0].doctor_lname;
             }
             dateTd.innerHTML = parsedData[0].appointment_date;
-            timeTd.innerHTML = parsedData[0].time.slice(0,5);  
+            timeTd.innerHTML = timeAMPM(parsedData[0].time);
 
             let editIcon; 
             let deleteIcon; 
@@ -115,4 +115,24 @@ function updateRow(data, appointment_id){
             }
        }
     }
+}
+
+function timeAMPM(inputString) {
+  var trimmedString = String(inputString).slice(0, 5);
+  let hour = parseInt(trimmedString.slice(0, 2));
+  let remainingString = trimmedString.slice(2);
+  let outputStr;
+
+  if (hour == 0) {
+    outputStr = "12" + remainingString + " AM";
+  } else if (hour > 0 && hour < 10) {
+    outputStr = trimmedString.substring(1) + " AM";
+  } else if (hour >= 10 && hour < 12) {
+    outputStr = trimmedString + " AM";
+  } else if (hour == 12) {
+    outputStr = trimmedString + " PM";
+  } else if (hour > 12) {
+    outputStr = (hour - 12).toString() + remainingString + " PM";
+  }
+  return outputStr;
 }
