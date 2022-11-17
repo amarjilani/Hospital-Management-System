@@ -46,14 +46,15 @@
             <td>{{this.doctor_id}}</td>
             <td>{{this.doctor_fname}} {{this.doctor_lname}}</td>
             <td>{{this.appointment_date}}</td>
-            <td>{{trimString this.time 0 5}}</td>
+            <td>{{ timeAMPM this.time }}</td>
+            
             <td><a href="#" onclick="toggleEdit({{this.appointment_id}}, {{this.patient_id}}, {{this.doctor_id}}, `{{this.appointment_date}}`, `{{this.time}}`)"><img
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
             <td><a
                 href="#"
-                onclick="showDeleteSection(`{{this.appointment_id}} {{this.patient_fname}} {{this.patient_lname}} with Dr. {{this.doctor_fname}} {{this.doctor_lname}} on {{this.appointment_date}} at {{this.time}}`)"
+                onclick="showDeleteSection(`{{this.appointment_id}} {{this.patient_fname}} {{this.patient_lname}} with Dr. {{this.doctor_fname}} {{this.doctor_lname}} on {{this.appointment_date}} at {{timeAMPM this.time}}`)"
               ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
           </tr>
         {{/each}}
