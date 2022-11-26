@@ -60,6 +60,7 @@ app.get("/doctors", function (req, res) {
   } else {
     isFullName = req.query.name.indexOf(" ") >= 0;
     if (isFullName) {
+      // user entered a doctor's first and last name separated by a space
       words = req.query.name.split(" ");
       inputFirstName = words[0];
       inputLastName = words[1];
@@ -144,6 +145,7 @@ app.get("/patients", function (req, res) {
   } else {
     isFullName = req.query.name.indexOf(" ") >= 0;
     if (isFullName) {
+      // user entered a patient's first and last name separated by a space
       words = req.query.name.split(" ");
       inputFirstName = words[0];
       inputLastName = words[1];
@@ -418,6 +420,7 @@ app.get("/illnesses", function (req, res) {
   if (req.query.name === undefined || req.query.name === "") {
     query1 = "SELECT * FROM Illnesses";
   } else {
+    // user entered an illness name in the searchbar
     query1 = `SELECT * FROM Illnesses WHERE LOWER(illness_name) LIKE LOWER("${req.query.name}")`;
   }
 
@@ -476,6 +479,7 @@ app.put("/update-illness", function (req, res) {
 
 app.delete("/delete-illness", function (req, res) {
   let data = req.body;
+  // get illnessid from data
   let illnessId = parseInt(data.illnessId);
   let deleteIlness = "DELETE FROM Illnesses WHERE illness_id = ?";
 
@@ -492,6 +496,7 @@ app.delete("/delete-illness", function (req, res) {
 app.get("/treatments", function (req, res) {
   let query1;
   if (req.query.name === undefined || req.query.name === "") {
+    // user did not enter a treatment name
     query1 = "SELECT * FROM Treatments";
   } else {
     query1 = `SELECT * FROM Treatments WHERE LOWER(treatment_name) LIKE LOWER("${req.query.name}")`;
@@ -552,6 +557,7 @@ app.put("/update-treatment", function (req, res) {
 
 app.delete("/delete-treatment", function (req, res) {
   let data = req.body;
+  // get treatment id from data
   let treatmentId = parseInt(data.treatmentId);
   let deleteTreatment = "DELETE FROM Treatments WHERE treatment_id = ?";
 
@@ -611,6 +617,7 @@ app.post("/add-illness-treatment", function (req, res) {
 
 app.delete("/delete-illness-treatment", function (req, res) {
   let data = req.body;
+  // get illnessTreatmentId from data
   let illnessTreatmentId = parseInt(data.illnessTreatmentId);
   let deleteillnessTreatment =
     "DELETE FROM Illnesses_Treatments WHERE illness_treatment_id = ?";

@@ -52,11 +52,20 @@
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
+            {{#if this.doctor_fname}}
+            {{!-- row contains a doctor id and name so include the doctor's name in the delete section  --}}
             <td><a
                 href="#"
                 onclick="showDeleteSection(`{{this.appointment_id}} {{this.patient_fname}} {{this.patient_lname}} with Dr. {{this.doctor_fname}} {{this.doctor_lname}} on {{this.appointment_date}} at {{timeAMPM this.time}}`)"
               ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
+            {{else}}
+          <td><a
+                href="#"
+                onclick="showDeleteSection(`{{this.appointment_id}} {{this.patient_fname}} {{this.patient_lname}} on {{this.appointment_date}} at {{timeAMPM this.time}}`)"
+              ><img class="delete-icon" src="assets/delete-icon.png" /></a></td>
           </tr>
+          {{/if}}
+          
         {{/each}}
 
       </table>
@@ -83,10 +92,10 @@
       </select>
 
       <label for="inputDate">Date: </label>
-      <input type="date" name="inputDate" id="inputDate">
+      <input type="date" name="inputDate" id="inputDate" required>
 
       <label for="inputTime">Time: </label>
-      <input type="time" name="inputTime" id="inputTime">
+      <input type="time" name="inputTime" id="inputTime" required>
       </fieldset>
 
       <input type="submit">

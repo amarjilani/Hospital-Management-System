@@ -1,12 +1,14 @@
-// Get the objects we need to modify
 let deleteDoctorForm = document.getElementById("deleteDoctorForm");
-
 deleteDoctorForm.addEventListener("submit", function (e) {
   // Prevent the form from submitting
   e.preventDefault();
 
   let inputDoctorId = document.getElementById("created-input").value;
 
+  // Citation for the following function:
+  // Date: 11/13/2022
+  // Based on:
+  // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
   let data = {
     doctorId: inputDoctorId,
   };
@@ -27,7 +29,12 @@ deleteDoctorForm.addEventListener("submit", function (e) {
   xhttp.send(JSON.stringify(data));
 });
 
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 function deleteRow(doctorId) {
+  // delete row from table and hide the delete section
   let table = document.getElementById("all-doctors");
   for (let i = 0, row; (row = table.rows[i]); i++) {
     if (table.rows[i].getAttribute("data-value") === doctorId) {
@@ -38,6 +45,7 @@ function deleteRow(doctorId) {
   }
 }
 
+// remove the labels and input to hide the delete section
 function hideDeleteSection() {
   let element = document.getElementById("delete");
   if (element.style.display === "block") {
@@ -51,6 +59,7 @@ function hideDeleteSection() {
   }
 }
 
+// create labels and input to show the delete section
 function showDeleteSection(message) {
   let element = document.getElementById("delete");
   if (element.style.display === "none") {

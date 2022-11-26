@@ -9,6 +9,10 @@ deletePatientIllnessForm.addEventListener("submit", function (e) {
 
   let inputPatientIllnessId = document.getElementById("created-input").value;
 
+  // Citation for the following function:
+  // Date: 11/13/2022
+  // Based on:
+  // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
   let data = {
     patientIllnessId: inputPatientIllnessId,
   };
@@ -27,7 +31,13 @@ deletePatientIllnessForm.addEventListener("submit", function (e) {
   xhttp.send(JSON.stringify(data));
 });
 
+
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 function deleteRow(patientIllnessId) {
+  // delete row from table and hide the delete section
   let table = document.getElementById("all-patients-illnesses");
   for (let i = 0, row; (row = table.rows[i]); i++) {
     if (table.rows[i].getAttribute("data-value") === patientIllnessId) {
@@ -38,6 +48,7 @@ function deleteRow(patientIllnessId) {
   }
 }
 
+// remove the labels and input to hide the delete section
 function hideDeleteSection() {
   let element = document.getElementById("delete");
   if (element.style.display === "block") {
@@ -51,6 +62,7 @@ function hideDeleteSection() {
   }
 }
 
+// create labels and input to show the delete section
 function showDeleteSection(message) {
   let element = document.getElementById("delete");
   if (element.style.display === "none") {
@@ -67,6 +79,7 @@ function showDeleteSection(message) {
     newInput.id = "created-input";
     newInput.type = "text";
     newInput.name = "id";
+    // disable input so user cannot change the value
     newInput.disabled = true;
     newInput.value = id;
     newInput.style.width = "30px";

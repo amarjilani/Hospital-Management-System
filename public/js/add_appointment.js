@@ -99,7 +99,19 @@ addRowToTable = (data) => {
     deleteIcon.style.width = 75 + "%";
 	deleteIcon.style.height = 20 + "px"
     deleteIcon.onclick = function(){
-        showDeleteSection(`${newRow.appointment_id} ${newRow.patient_fname} ${newRow.patient_lname} with Dr. ${newRow.doctor_fname} ${newRow.doctor_lname} on ${newRow.appointment_date} at ${timeAMPM(newRow.time)}`)
+        showDeleteSection(
+          newRow.doctor_fname
+            ? `${newRow.appointment_id} ${newRow.patient_fname} ${
+                newRow.patient_lname
+              } with Dr. ${newRow.doctor_fname} ${newRow.doctor_lname} on ${
+                newRow.appointment_date
+              } at ${timeAMPM(newRow.time)}`
+            : `${newRow.appointment_id} ${newRow.patient_fname} ${
+                newRow.patient_lname
+              } on ${
+                newRow.appointment_date
+              } at ${timeAMPM(newRow.time)}`
+        );
     }
 
     // Fill the cells with correct data
