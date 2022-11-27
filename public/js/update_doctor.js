@@ -1,11 +1,15 @@
-// Get the objects we need to modify
+// Get the update Doctor form 
 let updateDoctorForm = document.getElementById('update-doctor');
 
-// Modify the objects we need
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
+
+// On submit, collect data from the form 
 updateDoctorForm.addEventListener("submit", function (e) {
 
-    console.log(`update submitted`)
-    
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -63,21 +67,26 @@ updateDoctorForm.addEventListener("submit", function (e) {
 
 })
 
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
 
+// function to update a specific row within the Doctors table 
 function updateRow(data, doctor_id){
     let parsedData = JSON.parse(data);
-    console.log(parsedData)
-    
+
+    // get the Doctors table 
     let table = document.getElementById("all-doctors");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
+       //iterate through rows and find the row that matches the updated Doctor based on ID 
        if (table.rows[i].getAttribute("data-value") == doctor_id) {
 
+            // get the index of that row 
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+            // get all the TD elements of that row 
             let doctorFnameTd = updateRowIndex.getElementsByTagName("td")[1];
             let doctorLnameTd = updateRowIndex.getElementsByTagName("td")[2];
             let doctorEmailTd = updateRowIndex.getElementsByTagName("td")[3];
@@ -85,6 +94,7 @@ function updateRow(data, doctor_id){
             let editTd = updateRowIndex.getElementsByTagName("td")[5];
             let deleteTd = updateRowIndex.getElementsByTagName("td")[6];
 
+            // fill all the TD elements with the relevant data 
             doctorFnameTd.innerHTML = parsedData[0].doctor_fname;
             doctorLnameTd.innerHTML = parsedData[0].doctor_lname;
             doctorEmailTd.innerHTML = parsedData[0].doctor_email;
@@ -93,6 +103,7 @@ function updateRow(data, doctor_id){
             let editIcon; 
             let deleteIcon; 
             
+            // get the edit and delete icons from the edit and delete cells 
             for (let child of editTd.children) {
                 if (child.class = "edit-icon"){
                 editIcon = child 
@@ -102,7 +113,8 @@ function updateRow(data, doctor_id){
                 if (child.class = "delete-icon"){
                 deleteIcon = child 
             }}
-
+            
+            // update the onclick functions to use the newly updated information 
             editIcon.onclick = function(){
                 toggleEdit(parsedData[0].doctor_id, parsedData[0].doctor_fname, parsedData[0].doctor_lname, parsedData[0].doctor_email, parsedData[0].doctor_phone_number);}
 

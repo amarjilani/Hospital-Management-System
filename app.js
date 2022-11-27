@@ -1,5 +1,6 @@
 /*
-    SETUP
+  The following code is adapted from: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+  Date: 11/2022
 */
 
 // Express
@@ -77,8 +78,6 @@ app.get("/doctors", function (req, res) {
 
 app.post("/add-doctor", function (req, res) {
   let data = req.body;
-  console.log(data);
-
   // Create the query and run it on the database
   query1 = `INSERT INTO Doctors (doctor_fname, doctor_lname, doctor_email, doctor_phone_number) VALUES ('${data.doctor_fname}', '${data.doctor_lname}', '${data.doctor_email}', '${data.doctor_phone_number}')`;
   db.pool.query(query1, function (error, rows, fields) {
@@ -90,7 +89,6 @@ app.post("/add-doctor", function (req, res) {
     } else {
       let query2 = "SELECT * FROM Doctors;";
       db.pool.query(query2, function (err, rows, fields) {
-        // Turn datetime to date
         res.send(rows);
       });
     }
@@ -100,7 +98,6 @@ app.post("/add-doctor", function (req, res) {
 app.put("/update-doctor", function (req, res) {
   // Capture the incoming data and parse it back to a JS object
   let data = req.body;
-  console.log(data);
   // Create the query and run it on the database
   let query1 = `UPDATE Doctors SET doctor_fname = '${data.doctor_fname}', doctor_lname = '${data.doctor_lname}', doctor_email = '${data.doctor_email}', doctor_phone_number = '${data.doctor_phone_number}' WHERE doctor_id = ${data.doctor_id};`;
   let query2 = `SELECT * FROM Doctors WHERE doctor_id = ${data.doctor_id};`;
@@ -175,7 +172,6 @@ app.post("/add-patient", function (req, res) {
     } else {
       let query2 = "SELECT * FROM Patients;";
       db.pool.query(query2, function (err, rows, fields) {
-        // Turn datetime to date
         res.send(rows);
       });
     }
@@ -185,7 +181,6 @@ app.post("/add-patient", function (req, res) {
 app.put("/update-patient", function (req, res) {
   // Capture the incoming data and parse it back to a JS object
   let data = req.body;
-  console.log(data);
   // Create the query and run it on the database
   let query1 = `UPDATE Patients SET patient_fname = '${data.patient_fname}', patient_lname = '${data.patient_lname}', patient_age = ${data.patient_age}, patient_email = '${data.patient_email}', patient_phone_number = '${data.patient_phone_number}' WHERE patient_id = ${data.patient_id};`;
   let query2 = `SELECT * FROM Patients WHERE patient_id = ${data.patient_id};`;
@@ -246,8 +241,6 @@ app.get("/patients_illnesses", function (req, res) {
 
 app.post("/add-patient-illness", function (req, res) {
   let data = req.body;
-  console.log(data);
-
   // Create the query and run it on the database
   let query1 = `INSERT INTO Patients_Illnesses (patient_id, illness_id) VALUES ('${data.patient_id}', '${data.illness_id}')`;
   db.pool.query(query1, function (error, rows, fields) {
@@ -259,7 +252,6 @@ app.post("/add-patient-illness", function (req, res) {
     } else {
       let query2 =
         "SELECT Patients_Illnesses.patient_illness_id, Patients_Illnesses.patient_id, Patients.patient_fname, Patients.patient_lname, Patients_Illnesses.illness_id, Illnesses.illness_name FROM Patients_Illnesses LEFT JOIN Patients ON Patients_Illnesses.patient_id = Patients.patient_id LEFT JOIN Illnesses ON Patients_Illnesses.illness_id = Illnesses.illness_id ORDER BY patient_illness_id;";
-
       db.pool.query(query2, function (err, rows, fields) {
         // Turn datetime to date
         res.send(rows);
@@ -321,7 +313,6 @@ app.post("/add-appointment", function (req, res) {
   // Capture the incoming data and parse it back to a JS object
   let data = req.body;
   // Capture NULL values
-
   let doctorID = parseInt(data.doctorID);
 
   if (isNaN(doctorID)) {
@@ -444,7 +435,6 @@ app.post("/add-illness", function (req, res) {
     } else {
       let query2 = "SELECT * FROM Illnesses;";
       db.pool.query(query2, function (err, rows, fields) {
-        // Turn datetime to date
         res.send(rows);
       });
     }
@@ -454,7 +444,6 @@ app.post("/add-illness", function (req, res) {
 app.put("/update-illness", function (req, res) {
   // Capture the incoming data and parse it back to a JS object
   let data = req.body;
-  console.log(data);
   // Create the query and run it on the database
   let query1 = `UPDATE Illnesses SET illness_name = '${data.illness_name}', illness_description = '${data.illness_description}' WHERE illness_id = ${data.illness_id};`;
   let query2 = `SELECT * FROM Illnesses WHERE illness_id = ${data.illness_id};`;
@@ -509,8 +498,6 @@ app.get("/treatments", function (req, res) {
 
 app.post("/add-treatment", function (req, res) {
   let data = req.body;
-  console.log(data);
-
   // Create the query and run it on the database
   let query1 = `INSERT INTO Treatments (treatment_name, treatment_description, treatment_stock) VALUES ('${data.treatment_name}', '${data.treatment_description}', ${data.treatment_stock})`;
   db.pool.query(query1, function (error, rows, fields) {
@@ -522,7 +509,6 @@ app.post("/add-treatment", function (req, res) {
     } else {
       let query2 = "SELECT * FROM Treatments;";
       db.pool.query(query2, function (err, rows, fields) {
-        // Turn datetime to date
         res.send(rows);
       });
     }
@@ -594,7 +580,6 @@ app.get("/illnesses-treatments", function (req, res) {
 
 app.post("/add-illness-treatment", function (req, res) {
   let data = req.body;
-  console.log(data);
 
   // Create the query and run it on the database
   let query1 = `INSERT INTO Illnesses_Treatments (illness_id, treatment_id) VALUES ('${data.illness_id}', '${data.treatment_id}')`;
@@ -608,7 +593,6 @@ app.post("/add-illness-treatment", function (req, res) {
       let query2 =
         "SELECT Illnesses_Treatments.illness_treatment_id, Illnesses_Treatments.illness_id, Illnesses_Treatments.treatment_id, Illnesses.illness_name, Treatments.treatment_name FROM Illnesses_Treatments LEFT JOIN Illnesses ON Illnesses_Treatments.illness_id = Illnesses.illness_id LEFT JOIN Treatments ON Illnesses_Treatments.treatment_id = Treatments.treatment_id ORDER BY illness_treatment_id;";
       db.pool.query(query2, function (err, rows, fields) {
-        // Turn datetime to date
         res.send(rows);
       });
     }

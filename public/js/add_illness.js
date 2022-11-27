@@ -1,8 +1,13 @@
 
-// Get the objects we need to modify
+// Get the add Illness form 
 let addIllnessForm = document.getElementById('add-illness');
 
-// Modify the objects we need
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+
+// On submit, collect data from form 
 addIllnessForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
@@ -23,7 +28,6 @@ addIllnessForm.addEventListener("submit", function (e) {
         illness_name: illnessName,
         illness_description: illnessDescription
     }
-    console.log(data)
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -53,12 +57,15 @@ addIllnessForm.addEventListener("submit", function (e) {
 })
 
 
-// Creates a single row from an Object representing a single record from 
-// bsg_people
-addRowToTable = (data) => {
-    console.log(data)
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
-    // Get a reference to the current table on the page and clear it out.
+// Creates a new row in the Illnesses table using the passed data 
+addRowToTable = (data) => {
+
+    // Get a reference to the current table
     let currentTable = document.getElementById("all-illnesses");
 
     // Get a reference to the new row from the database query (last object)
@@ -66,7 +73,7 @@ addRowToTable = (data) => {
     let newRow = parsedData[parsedData.length - 1]
     console.log("newRow" + newRow)
 
-    // Create a row and cells
+    // Create a row and all cells needed for the row 
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let nameCell = document.createElement("TD");
@@ -76,17 +83,21 @@ addRowToTable = (data) => {
     let editIcon = document.createElement("img")
     let deleteIcon = document.createElement("img")
 
+    // create edit icon 
     editIcon.class = "edit-icon"
     editIcon.src = "../assets/edit-icon.png"
     editIcon.style.width = 75 + "%";
 	editIcon.style.height = 20 + "px"
+    // pass data to toggleEdit function to prepopulate the edit form 
     editIcon.onclick = function(){
         toggleEdit(newRow.illness_id, newRow.illness_name, newRow.illness_description);}
-
+    
+    // create delete icon 
     deleteIcon.class = "delete-icon"
     deleteIcon.src = "../assets/delete-icon.png"
     deleteIcon.style.width = 75 + "%";
 	deleteIcon.style.height = 20 + "px"
+    // pass data to showDeleteSection function to display correct information on delete form 
     deleteIcon.onclick = function(){
         showDeleteSection(`${newRow.illness_id} : ${newRow.illness_name}`)
     }
@@ -110,18 +121,24 @@ addRowToTable = (data) => {
     currentTable.appendChild(row);
 
 }
+
+// function to display/hide edit form when the edit icon is clicked 
 function toggleEdit(illness_id, illness_name, illness_description) { 
+
+    // get the update form and all the fields within it 
     let element = document.getElementById("update");
     let idInput = document.getElementById("inputIllnessIDUpdate")
     let illnessNameInput = document.getElementById("inputIllnessNameUpdate")
     let illnessDescriptionInput = document.getElementById("inputIllnessDescriptionUpdate")
 
+    // if it is currently not displayed, fill all the fielnds with the passed data and display it 
     if (element.style.display === "none") { 
         idInput.value = illness_id
         illnessNameInput.value = illness_name
         illnessDescriptionInput.value = illness_description
         element.style.display = "block"; 
     } else {
+    // otherwise hide the form and clear all the fields 
         element.style.display = "none";
         idInput.value = ''
         illnessNameInput.value = ''

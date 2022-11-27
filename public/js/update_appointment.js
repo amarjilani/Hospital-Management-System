@@ -1,7 +1,12 @@
-// Get the objects we need to modify
+// Get the update Appointment form 
 let updateAppointmentForm = document.getElementById('update-appointment');
 
-// Modify the objects we need
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
+// On submit, collect data from the form 
 updateAppointmentForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
@@ -40,7 +45,7 @@ updateAppointmentForm.addEventListener("submit", function (e) {
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-            // Add the new data to the table
+            // Add the new data to the table and hide the form 
             updateRow(xhttp.response, appointmentIDValue)
             toggleEdit()
 
@@ -61,19 +66,26 @@ updateAppointmentForm.addEventListener("submit", function (e) {
 
 })
 
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
 
+// function to update a specific row within the Appointments table 
 function updateRow(data, appointment_id){
     let parsedData = JSON.parse(data);
     
+    // gets the Appointments table 
     let table = document.getElementById("all-appointments");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
+       //iterate through rows to find the row that matches the updated Appointment based on ID
        if (table.rows[i].getAttribute("data-value") == appointment_id) {
 
+            // get the index of the row to update 
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
+            // get all the TD elements in that row 
             let patientIdTd = updateRowIndex.getElementsByTagName("td")[1];
             let patientNameTd = updateRowIndex.getElementsByTagName("td")[2];
             let doctorIdTd = updateRowIndex.getElementsByTagName("td")[3];
@@ -83,9 +95,11 @@ function updateRow(data, appointment_id){
             let editTd = updateRowIndex.getElementsByTagName("td")[7];
             let deleteTd = updateRowIndex.getElementsByTagName("td")[8];
 
+            // fill all the TD elements with the relevant data 
             patientIdTd.innerHTML = parsedData[0].patient_id;
             patientNameTd.innerHTML = parsedData[0].patient_fname + " " + parsedData[0].patient_lname
             doctorIdTd.innerHTML = parsedData[0].doctor_id;
+            // leave the doctor cell blank if the doctor is null 
             if (parsedData[0].doctor_fname == null){
                 doctorNameTd.innerHTML = ""
             } else{
@@ -97,6 +111,7 @@ function updateRow(data, appointment_id){
             let editIcon; 
             let deleteIcon; 
             
+            // get the edit and delete icons from the edit and delete cells 
             for (let child of editTd.children) {
                 if (child.class = "edit-icon"){
                 editIcon = child 
@@ -106,7 +121,8 @@ function updateRow(data, appointment_id){
                 if (child.class = "delete-icon"){
                 deleteIcon = child 
             }}
-
+            
+            // update the onclick functions to use the newly updated information
             editIcon.onclick = function(){
                 toggleEdit(parsedData[0].appointment_id, parsedData[0].patient_id, parsedData[0].doctor_id, parsedData[0].appointment_date, parsedData[0].time);}
 
@@ -117,6 +133,7 @@ function updateRow(data, appointment_id){
     }
 }
 
+// function to convert 24hr time to 12hr time 
 function timeAMPM(inputString) {
   var trimmedString = String(inputString).slice(0, 5);
   let hour = parseInt(trimmedString.slice(0, 2));

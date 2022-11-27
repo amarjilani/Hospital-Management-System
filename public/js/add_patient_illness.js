@@ -1,8 +1,13 @@
 
-// Get the objects we need to modify
+// Get the add Patient_Illness form 
 let addPatientIllnessForm = document.getElementById('add-patient-illness');
 
-// Modify the objects we need
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+
+// On submit, collect data from form 
 addPatientIllnessForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
@@ -22,7 +27,6 @@ addPatientIllnessForm.addEventListener("submit", function (e) {
         patient_id: patientId,
         illness_id: illnessId
     }
-    console.log(data)
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -52,18 +56,20 @@ addPatientIllnessForm.addEventListener("submit", function (e) {
 })
 
 
-// Creates a single row from an Object representing a single record from 
-// bsg_people
-addRowToTable = (data) => {
-    console.log(data)
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on: 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
-    // Get a reference to the current table on the page and clear it out.
+// Creates a new row in the Patients_Illnesses table using the passed data 
+addRowToTable = (data) => {
+
+    // Get a reference to the current table
     let currentTable = document.getElementById("all-patients-illnesses");
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
-    console.log("newRow" + newRow)
 
     // Create a row and cells
     let row = document.createElement("TR");
@@ -73,10 +79,12 @@ addRowToTable = (data) => {
     let deleteCell = document.createElement("TD");
     let deleteIcon = document.createElement("img")
 
+    // create delete icon 
     deleteIcon.class = "delete-icon"
     deleteIcon.src = "../assets/delete-icon.png"
     deleteIcon.style.width = 75 + "%";
 	deleteIcon.style.height = 20 + "px"
+    // pass data to showDeleteSection function to display correct information on delete form 
     deleteIcon.onclick = function(){
         showDeleteSection(`${newRow.patient_illness_id} with Patient ID ${newRow.patient_id} and Illness ID ${newRow.illness_id}`)
     }
