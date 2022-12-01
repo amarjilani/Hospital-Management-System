@@ -75,16 +75,16 @@ addRowToTable = (data) => {
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let patientIdCell = document.createElement("TD");
+    let patientNameCell = document.createElement("TD");
     let illnessIdCell = document.createElement("TD");
+    let illnessNameCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
-    let deleteIcon = document.createElement("img")
+    let deleteIcon = document.createElement("img");
 
-    // create delete icon 
     deleteIcon.class = "delete-icon"
     deleteIcon.src = "../assets/delete-icon.png"
     deleteIcon.style.width = 75 + "%";
 	deleteIcon.style.height = 20 + "px"
-    // pass data to showDeleteSection function to display correct information on delete form 
     deleteIcon.onclick = function(){
         showDeleteSection(`${newRow.patient_illness_id} with Patient ID ${newRow.patient_id} and Illness ID ${newRow.illness_id}`)
     }
@@ -92,14 +92,18 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.patient_illness_id;
     patientIdCell.innerText = newRow.patient_id;
+    patientNameCell.innerText = newRow.patient_fname + " " + newRow.patient_lname; 
     illnessIdCell.innerText = newRow.illness_id;
+    illnessNameCell.innerText = newRow.illness_name; 
     deleteCell.append(deleteIcon)
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(patientIdCell);
+    row.appendChild(patientNameCell);
     row.appendChild(illnessIdCell);
-    row.appendChild(deleteCell)
+    row.appendChild(illnessNameCell);
+    row.appendChild(deleteCell);
     row.setAttribute('data-value', newRow.patient_illness_id);
     
     // Add the row to the table

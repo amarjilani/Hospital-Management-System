@@ -48,10 +48,18 @@
             <td>{{this.appointment_date}}</td>
             <td>{{ timeAMPM this.time }}</td>
             
+            {{#if this.doctor_id}}
             <td><a href="#" onclick="toggleEdit({{this.appointment_id}}, {{this.patient_id}}, {{this.doctor_id}}, `{{this.appointment_date}}`, `{{this.time}}`)"><img
                   class="edit-icon"
                   src="assets/edit-icon.png"
                 /></a></td>
+            {{else}}
+            <td><a href="#" onclick="toggleEdit({{this.appointment_id}}, {{this.patient_id}}, '', `{{this.appointment_date}}`, `{{this.time}}`)"><img
+                  class="edit-icon"
+                  src="assets/edit-icon.png"
+                /></a></td>
+            {{/if}}
+
             {{#if this.doctor_fname}}
             {{!-- row contains a doctor id and name so include the doctor's name in the delete section  --}}
             <td><a
@@ -73,7 +81,7 @@
 
     <div id="insert" style="display: block">
       <form id="add-appointment">
-      <legend><strong>Create Appointment</strong></legend>
+      <legend><strong>Add Appointment</strong></legend>
       <fieldset class="fields">
       <label for="inputPatientID">Patient: </label>
       <select name="inputPatientID" id="inputPatientID">
@@ -98,7 +106,7 @@
       <input type="time" name="inputTime" id="inputTime" required>
       </fieldset>
 
-      <input type="submit">
+      <input type="submit" value="Add New Appointment">
       </form>
     </div>
 

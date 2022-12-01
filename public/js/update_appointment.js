@@ -127,8 +127,20 @@ function updateRow(data, appointment_id){
                 toggleEdit(parsedData[0].appointment_id, parsedData[0].patient_id, parsedData[0].doctor_id, parsedData[0].appointment_date, parsedData[0].time);}
 
             deleteIcon.onclick = function(){
-                showDeleteSection(`${parsedData[0].appointment_id} ${parsedData[0].patient_fname} ${parsedData[0].patient_lname} with Dr. ${parsedData[0].doctor_fname} ${parsedData[0].doctor_lname} on ${parsedData[0].appointment_date} at ${timeAMPM(parsedData[0].time)}`)
-            }
+              showDeleteSection(
+                parsedData[0].doctor_fname
+                  ? `${parsedData[0].appointment_id} ${parsedData[0].patient_fname} ${
+                    parsedData[0].patient_lname
+                    } with Dr. ${parsedData[0].doctor_fname} ${parsedData[0].doctor_lname} on ${
+                      parsedData[0].appointment_date
+                    } at ${timeAMPM(parsedData[0].time)}`
+                  : `${parsedData[0].appointment_id} ${parsedData[0].patient_fname} ${
+                    parsedData[0].patient_lname
+                    } on ${
+                      parsedData[0].appointment_date
+                    } at ${timeAMPM(parsedData[0].time)}`
+              );
+          }
        }
     }
 }
