@@ -1,16 +1,16 @@
 // Get the objects we need to modify
 let deleteIllnessForm = document.getElementById("deleteIllnessForm");
 
+// Citation for the following function:
+// Date: 11/13/2022
+// Based on:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 deleteIllnessForm.addEventListener("submit", function (e) {
   // Prevent the form from submitting
   e.preventDefault();
 
   let inputIllnessId = document.getElementById("created-input").value;
 
-  // Citation for the following function:
-  // Date: 11/13/2022
-  // Based on:
-  // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
   let data = {
     illnessId: inputIllnessId,
   };

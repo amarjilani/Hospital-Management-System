@@ -1,14 +1,14 @@
 let deleteAppointmentForm = document.getElementById("deleteAppointmentForm");
+
+// Citation for the following function:
+// Date: 11/10/2022
+// Based on:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 deleteAppointmentForm.addEventListener("submit", function (e) {
   // prevent the form from submitting
   e.preventDefault();
 
   let inputAppointmentId = document.getElementById("created-input").value;
-
-  // Citation for the following function:
-  // Date: 11/10/2022
-  // Based on:
-  // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
   let data = {
     appointmentId: inputAppointmentId,
   };
