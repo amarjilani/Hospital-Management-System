@@ -94,6 +94,7 @@
       <label for="inputDoctorID">Doctor: </label>
       <select name="inputDoctorID" id="inputDoctorID">
           <option value="NULL"> Select Doctor </option>
+          <option value="NULL"> None </option>
           {{#each doctors}}
           <option value="{{this.doctor_id}}">{{this.doctor_fname}} {{this.doctor_lname}}</option>
           {{/each}}
@@ -130,6 +131,7 @@
           <label for="inputDoctorID">Doctor: </label>
           <select name="inputDoctorID" id="inputDoctorIDUpdate">
               <option value=""> Select Doctor </option>
+              <option value="NULL"> None </option>
               {{#each doctors}}
               <option value="{{this.doctor_id}}">{{this.doctor_fname}} {{this.doctor_lname}}</option>
               {{/each}}
